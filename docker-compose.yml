@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  apache_php:
+    image: lavoweb/php-7.3
+    container_name: inventaire_apache_php
+    ports:
+      - "80:80"
+    volumes:
+      - ./.docker/config/vhosts:/etc/apache2/sites-enabled
+      - .:/var/www/html
+    links:
+      - db:db
+
+  db:
+    image: mariadb/server:10.4
+    container_name: inventaire_db
+    volumes:
+      - ./.docker/data/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MARIADB_DATABASE: inventaire_tissus
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_USER: db
+      MARIADB_PASSWORD: db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: inventaire_phpmyadmin
+    ports:
+      - "8080:80"
+    links:
+      - db:db
