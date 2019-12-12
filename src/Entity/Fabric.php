@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -55,6 +57,16 @@ class Fabric
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $comment;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Color", inversedBy="fabrics")
+     */
+    private $color;
+
+    public function __construct()
+    {
+        $this->color = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -153,6 +165,32 @@ class Fabric
     public function setComment(?string $comment): self
     {
         $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Color[]
+     */
+    public function getColor(): Collection
+    {
+        return $this->color;
+    }
+
+    public function addColor(Color $color): self
+    {
+        if (!$this->color->contains($color)) {
+            $this->color[] = $color;
+        }
+
+        return $this;
+    }
+
+    public function removeColor(Color $color): self
+    {
+        if ($this->color->contains($color)) {
+            $this->color->removeElement($color);
+        }
 
         return $this;
     }

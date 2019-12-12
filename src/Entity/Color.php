@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +27,16 @@ class Color
      * @ORM\Column(type="string", length=255)
      */
     private $code;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Fabric", mappedBy="color")
+     */
+    private $fabrics;
+
+    public function __construct()
+    {
+        $this->fabrics = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -51,6 +63,34 @@ class Color
     public function setCode(string $code): self
     {
         $this->code = $code;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Fabric[]
+     */
+    public function getFabrics(): Collection
+    {
+        return $this->fabrics;
+    }
+
+    public function addFabric(Fabric $fabric): self
+    {
+        if (!$this->fabrics->contains($fabric)) {
+            $this->fabrics[] = $fabric;
+            $fabric->addColor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFabric(Fabric $fabric): self
+    {
+        if ($this->fabrics->contains($fabric)) {
+            $this->fabrics->removeElement($fabric);
+            $fabric->removeColor($this);
+        }
 
         return $this;
     }
