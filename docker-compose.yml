@@ -2,7 +2,7 @@ version: '2'
 
 services:
     apache_php:
-        image: lavoweb/php-7.3:latest
+        build: .docker/apache_php
         container_name: apache_php
         ports:
             - "80:80"

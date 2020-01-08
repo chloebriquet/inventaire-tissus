@@ -13,7 +13,6 @@ SYMFONY                   = $(EXEC_APACHE_PHP_CONTAINER) bin/console
 ##
 
 project-install: docker-build dev-start composer-install db-reset npm npm-dev ## Install the project and start the dev environment
-	rm -rf vendor var node_modules
 
 project-remove: docker-kill ## Stop the dev environment and remove generated files
 	$(ECHO) "Removing files"
