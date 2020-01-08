@@ -10,8 +10,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Code
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;

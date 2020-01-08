@@ -16,22 +16,18 @@ class FabricFixtures extends Fixture implements DependentFixtureInterface
 
     /**
      * FabricFixtures constructor.
-     * @param ColorRepository $colorRepository
      */
     public function __construct(ColorRepository $colorRepository)
     {
         $this->colorRepository = $colorRepository;
     }
 
-    /**
-     * @param ObjectManager $manager
-     */
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create();
         $colors = $this->colorRepository->findAll();
 
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 30; ++$i) {
             $fabric = new Fabric();
             $fabric->setBox(rand(1, 30));
             $fabric->setMaterial($faker->word);
@@ -41,7 +37,7 @@ class FabricFixtures extends Fixture implements DependentFixtureInterface
             $fabric->setWidth(rand(100, 500));
             $fabric->setLength(rand(100, 500));
             $fabric->setComment($faker->words(5, true));
-            $fabric->addColor($colors[rand(0,19)]);
+            $fabric->addColor($colors[rand(0, 19)]);
 
             $manager->persist($fabric);
         }
@@ -50,12 +46,12 @@ class FabricFixtures extends Fixture implements DependentFixtureInterface
     }
 
     /**
-     * @inheritDoc
+     * {@inheritdoc}
      */
     public function getDependencies()
     {
         return [
-            ColorFixtures::class
+            ColorFixtures::class,
         ];
     }
 }

@@ -12,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 class Fabric
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
