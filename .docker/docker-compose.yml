@@ -1,0 +1,36 @@
+version: '3.5'
+
+services:
+    apache_php:
+        build: apache_php
+        container_name: $APACHE_PHP_CONTAINER_NAME
+        ports:
+            - $APACHE_PHP_PORT:80
+        volumes:
+            - ./config/vhosts:/etc/apache2/sites-enabled
+            - ..:$APACHE_PHP_ROOT_DIR
+
+    db:
+        image: mariadb/server:10.4
+        container_name: $DB_CONTAINER_NAME
+        volumes:
+            - ./data/mysql:/var/lib/mysql
+        ports:
+            - $DB_PORT:3306
+        environment:
+            MARIADB_DATABASE: $DB_NAME
+            MARIADB_ROOT_PASSWORD: $DB_ROOT_PASSWORD
+            MARIADB_USER: $DB_USER
+            MARIADB_PASSWORD: $DB_PASSWORD
+        depends_on:
+            - $APACHE_PHP_CONTAINER_NAME
+
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: $PHPMYADMIN_CONTAINER_NAME
+        ports:
+            - $PHPMYADMIN_PORT:80
+        links:
+            - $DB_CONTAINER_NAME:db
+        depends_on:
+            - $DB_CONTAINER_NAME
