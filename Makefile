@@ -1,7 +1,7 @@
 DOCKER_DIR                = .docker
 DOCKER_COMPOSE            = cd $(DOCKER_DIR) && sudo docker-compose
 
-EXEC_APACHE_PHP_CONTAINER = ${DOCKER_DIR}/bin/docker-apache-php
+EXEC_APACHE_PHP_CONTAINER = ${DOCKER_DIR}/bin/docker-php
 ECHO                      = ${DOCKER_DIR}/bin/echo-title
 
 NPM                       = $(EXEC_APACHE_PHP_CONTAINER) npm
