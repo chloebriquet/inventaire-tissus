@@ -1,0 +1,3 @@
+#!/bin/sh
+
+docker-compose run --rm dockerize -wait tcp://mariadb:3306
