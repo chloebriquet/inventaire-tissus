@@ -1,11 +1,11 @@
 <?php
+
 return PhpCsFixer\Config::create()
     ->setRules(
         [
             '@PSR1' => true,
             '@PSR2' => true,
             '@Symfony' => true,
-            'single_line_throw' => false,
             'binary_operator_spaces' => ['operators' => ['=>' => 'align']],
             'doctrine_annotation_array_assignment' => true,
             'doctrine_annotation_braces' => true,

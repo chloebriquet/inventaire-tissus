@@ -13,8 +13,8 @@ class User implements UserInterface
 {
     /**
      * @var int
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\Id
+     * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
     private $id;
@@ -23,7 +23,6 @@ class User implements UserInterface
      * The internal primary identity key.
      *
      * @var UuidInterface
-     *
      * @ORM\Column(type="uuid", unique=true)
      */
     protected $uuid;
@@ -56,17 +55,11 @@ class User implements UserInterface
         return $this->id;
     }
 
-    /**
-     * @return UuidInterface
-     */
     public function getUuid(): UuidInterface
     {
         return $this->uuid;
     }
 
-    /**
-     * @param UuidInterface $uuid
-     */
     public function setUuid(UuidInterface $uuid): void
     {
         $this->uuid = $uuid;
@@ -97,9 +90,6 @@ class User implements UserInterface
         return $this->email;
     }
 
-    /**
-     * @param string $email
-     */
     public function setEmail(string $email): void
     {
         $this->email = $email;
