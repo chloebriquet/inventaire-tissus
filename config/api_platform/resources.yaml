@@ -1,0 +1,18 @@
+App\Entity\User:
+    collectionOperations:
+        get:
+            normalization_context:
+                groups: ['user:read']
+        post:
+            denormalization_context:
+                groups: ['user:write']
+    itemOperations:
+        get:
+            normalization_context:
+                groups: ['user:read']
+        put:
+            denormalization_context:
+                groups: ['user:write']
+            security: 'object == user'
+        delete:
+            security: 'is_granted("ROLE_ADMIN") or object == user'
