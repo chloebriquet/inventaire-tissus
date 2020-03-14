@@ -24,12 +24,13 @@
         },
         methods: {
             authenticate() {
+                const formData = new FormData();
+                formData.append('username', 'chloe');
+                formData.append('password', 'password');
+                formData.append('_remember_me', 'on');
+
                 HTTP
-                    .post('/login', {
-                        username: 'chloe',
-                        password: 'password',
-                        _remember_me: true
-                    })
+                    .post('/login', formData)
                     .then(response => {
                         HTTP
                             .get(response.headers.location)
