@@ -13,7 +13,7 @@ class HomeController extends BaseController
     public function index(SerializerInterface $serializer)
     {
         return $this->render('index.html.twig', [
-            'user'            => $serializer->serialize($this->getUser(), 'jsonld'),
+            'user' => $serializer->serialize($this->getUser(), 'jsonld'),
         ]);
     }
 }

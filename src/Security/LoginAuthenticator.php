@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
-class FormLoginAuthenticator extends AbstractGuardAuthenticator
+class LoginAuthenticator extends AbstractGuardAuthenticator
 {
     /**
      * @var UserRepository
@@ -50,15 +50,16 @@ class FormLoginAuthenticator extends AbstractGuardAuthenticator
     {
         return $request->isMethod('POST')
             && 'login' === $request->attributes->get('_route')
-            && false !== strpos($request->getRequestFormat(), 'json')
             && false !== strpos($request->getContentType(), 'json');
     }
 
     public function getCredentials(Request $request)
     {
+        $data = json_decode($request->getContent());
+
         return [
-            'username'   => $request->request->get('username'),
-            'password'   => $request->request->get('password'),
+            'username'   => $data->username,
+            'password'   => $data->password,
         ];
     }
 
