@@ -45,6 +45,11 @@ class Color
      */
     private $fabrics;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $deletedAt;
+
     public function __construct()
     {
         $this->fabrics = new ArrayCollection();
@@ -103,6 +108,18 @@ class Color
             $this->fabrics->removeElement($fabric);
             $fabric->removeColor($this);
         }
+
+        return $this;
+    }
+
+    public function getDeletedAt(): ?\DateTimeInterface
+    {
+        return $this->deletedAt;
+    }
+
+    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
+    {
+        $this->deletedAt = $deletedAt;
 
         return $this;
     }
