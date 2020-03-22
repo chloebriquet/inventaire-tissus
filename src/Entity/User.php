@@ -5,10 +5,15 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ *
+ * @UniqueEntity("username")
+ * @UniqueEntity("email")
  *
  * @ApiResource
  */
@@ -27,12 +32,17 @@ class User implements UserInterface
     /**
      * @var string
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * @Assert\NotBlank
      */
     private $username;
 
     /**
      * @var string
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * @Assert\Email
+     * @Assert\NotBlank
      */
     private $email;
 

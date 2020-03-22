@@ -6,6 +6,7 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\FabricRepository")
@@ -23,26 +24,36 @@ class Fabric
 
     /**
      * @ORM\Column(type="integer")
+     *
+     * @Assert\NotBlank
      */
     private $box;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
      */
     private $material;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
      */
     private $pattern;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
      */
     private $state;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank
      */
     private $thickness;
 
@@ -62,13 +73,15 @@ class Fabric
     private $comment;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Color", inversedBy="fabrics")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Color", inversedBy="fabrics", cascade={"persist"})
+     *
+     * @Assert\Count(min="1")
      */
-    private $color;
+    private $colors;
 
     public function __construct()
     {
-        $this->color = new ArrayCollection();
+        $this->colors = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -175,15 +188,15 @@ class Fabric
     /**
      * @return Collection|Color[]
      */
-    public function getColor(): Collection
+    public function getColors(): Collection
     {
-        return $this->color;
+        return $this->colors;
     }
 
     public function addColor(Color $color): self
     {
-        if (!$this->color->contains($color)) {
-            $this->color[] = $color;
+        if (!$this->colors->contains($color)) {
+            $this->colors[] = $color;
         }
 
         return $this;
@@ -191,8 +204,8 @@ class Fabric
 
     public function removeColor(Color $color): self
     {
-        if ($this->color->contains($color)) {
-            $this->color->removeElement($color);
+        if ($this->colors->contains($color)) {
+            $this->colors->removeElement($color);
         }
 
         return $this;

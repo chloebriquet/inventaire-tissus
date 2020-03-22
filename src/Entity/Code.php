@@ -4,9 +4,12 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CodeRepository")
+ *
+ * @UniqueEntity("name")
  *
  * @ApiResource
  */
