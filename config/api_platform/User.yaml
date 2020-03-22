@@ -1,0 +1,21 @@
+App\Entity\User:
+    attributes:
+        security: 'is_granted("ROLE_USER")'
+    collectionOperations:
+        get:
+            normalization_context:
+                groups: ['user:read']
+        post:
+            denormalization_context:
+                groups: ['user:write']
+            security: 'is_granted("ROLE_ADMIN")'
+    itemOperations:
+        get:
+            normalization_context:
+                groups: ['user:read']
+        put:
+            denormalization_context:
+                groups: ['user:write']
+            security: 'is_granted("ROLE_ADMIN") or object == user'
+        delete:
+            security: 'is_granted("ROLE_ADMIN") or object == user'
