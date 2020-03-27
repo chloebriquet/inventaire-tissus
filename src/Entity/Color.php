@@ -41,7 +41,7 @@ class Color
     private $code;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Fabric", mappedBy="color")
+     * @ORM\ManyToMany(targetEntity="App\Entity\Fabric", mappedBy="colors")
      */
     private $fabrics;
 

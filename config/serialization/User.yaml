@@ -8,5 +8,6 @@ App\Entity\User:
             groups: ['user:read', 'user:write']
         roles:
             groups: ['user:read', 'user:write']
-        password:
+        plainPassword:
+            serialized_name: password
             groups: ['user:write']

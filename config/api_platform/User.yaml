@@ -8,6 +8,7 @@ App\Entity\User:
         post:
             denormalization_context:
                 groups: ['user:write']
+            validation_groups: ['Default', 'user:create']
             security: 'is_granted("ROLE_ADMIN")'
     itemOperations:
         get:
