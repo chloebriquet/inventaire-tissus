@@ -32,3 +32,9 @@ services:
     App\DataFixtures\ColorFixtures:
         arguments:
             $webcolors: '%webcolors%'
+
+    kernel.listener.doctrine:
+        class: App\Listener\DeletedListener
+        public: false
+        tags:
+            - { name: doctrine.event_listener, event: onFlush, method: onFlush }
