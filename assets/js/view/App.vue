@@ -1,17 +1,19 @@
 <template>
     <div id="app">
-        <h1 v-if="user">Hi {{ user.username }}</h1>
-        <h1 v-else>Hi you!</h1>
-        <button @click="authenticate">Login</button>
-        <button @click="logout">Logout</button>
+        <Navbar :user="user" />
     </div>
 </template>
 
 <script>
     import HTTP from "../http-common";
 
+    import Navbar from "../components/Navbar";
+
     export default {
         name: "App",
+        components: {
+            Navbar
+        },
         data() {
             return {
                 user: null
