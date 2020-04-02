@@ -9,6 +9,7 @@ class HomeController extends BaseController
 {
     /**
      * @Route("/", name="home")
+     * @Route("/{route}", name="vue", requirements={"route"="^(?!.*api|_wdt|_profiler).+"})
      */
     public function index(SerializerInterface $serializer)
     {

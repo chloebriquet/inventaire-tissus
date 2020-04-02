@@ -1,13 +1,14 @@
 <template>
     <div id="app">
         <Navbar :user="user" />
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
     import HTTP from "../http-common";
 
-    import Navbar from "../components/Navbar";
+    import Navbar from "./Navbar";
 
     export default {
         name: "App",
@@ -56,6 +57,6 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>

@@ -8,14 +8,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends AbstractController
 {
     /**
-     * @Route("/login", name="login", methods={"POST"})
+     * @Route("/api/login", name="login", methods={"POST"})
      */
     public function login()
     {
     }
 
     /**
-     * @Route("/logout", name="logout")
+     * @Route("/api/logout", name="logout")
      */
     public function logout()
     {
