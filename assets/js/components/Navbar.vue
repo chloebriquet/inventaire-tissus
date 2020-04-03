@@ -1,8 +1,8 @@
 <template>
-    <b-navbar>
+    <b-navbar type="is-success">
         <template slot="brand">
             <b-navbar-item href="/">
-                Yards and Co. <b-icon icon="scissors-cutting" size="is-large" />
+                <b-icon icon="scissors-cutting" size="is-medium" /> Yards and Co.
             </b-navbar-item>
         </template>
         <template slot="start">
@@ -46,13 +46,15 @@
     </b-navbar>
 </template>
 
-<script>
-    export default {
+<script lang="ts">
+    import Vue from 'vue';
+
+    export default Vue.extend({
         name: "Navbar",
         props: {
             user: Object,
         }
-    }
+    })
 </script>
 
 <style lang="scss" scoped>

@@ -1,13 +1,22 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports" : true,
+    "esModuleInterop" : true,
     "module": "es6",
+    "moduleResolution": "Node",
     "noImplicitAny": true,
     "noImplicitReturns": true,
+    "noImplicitThis": true,
     "removeComments": true,
     "sourceMap": true,
     "strict": true,
     "target": "es6"
   },
+  "include": [
+    "assets/js/*.ts",
+    "assets/js/**/*.ts",
+    "assets/js/**/*.vue"
+  ],
   "exclude": [
     "node_modules"
   ]
