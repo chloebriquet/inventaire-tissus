@@ -10,8 +10,13 @@
     "removeComments": true,
     "sourceMap": true,
     "strict": true,
+    "strictNullChecks": true,
     "target": "es6"
   },
+  "lib": [
+    "es6",
+    "dom"
+  ],
   "include": [
     "assets/js/*.ts",
     "assets/js/**/*.ts",

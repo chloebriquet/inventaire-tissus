@@ -24,5 +24,19 @@ new Vue({
   el: '#app',
   template: '<App/>',
   components: { App },
-  router
+  router,
+  data() {
+    return {
+      user: {} as User,
+      isLoaded: false as boolean
+    };
+  },
+  mounted(): void {
+    document.onreadystatechange = () => {
+      if (document.readyState === 'complete' && null !== window.user) {
+        this.user = window.user;
+        this.isLoaded = true;
+      }
+    };
+  }
 });

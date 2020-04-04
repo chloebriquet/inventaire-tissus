@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-const baseUrl: string = document.origin;
+const baseUrl: string = window.location.origin;
 const apiUrl: string = baseUrl + '/api';
 const headers: object = { Accept: 'application/ld+json' };
 const withCredentials: boolean = true;

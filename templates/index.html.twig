@@ -1,13 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <script lang="ts">
-        import User from "../assets/js/models/user";
-
-        interface Window {
-            user: User;
-        }
-
+    <script lang="ts" type="module">
         window.user = {{ user|raw }};
     </script>
     <div id="app"></div>
