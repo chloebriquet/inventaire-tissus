@@ -33,9 +33,12 @@ new Vue({
   },
   mounted(): void {
     document.onreadystatechange = () => {
-      if (document.readyState === 'complete' && null !== window.user) {
-        this.user = window.user;
+      if (document.readyState === 'complete') {
         this.isLoaded = true;
+
+        if (null !== window.user) {
+          this.user = window.user;
+        }
       }
     };
   }
