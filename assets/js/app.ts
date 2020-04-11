@@ -15,31 +15,31 @@ Vue.use(Buefy);
 Vue.config.productionTip = false;
 
 declare global {
-  interface Window {
-    user: null | User;
-  }
+    interface Window {
+        user: null | User;
+    }
 }
 
 new Vue({
-  el: '#app',
-  template: '<App/>',
-  components: { App },
-  router,
-  data() {
-    return {
-      user: {} as User,
-      isLoaded: false as boolean
-    };
-  },
-  mounted(): void {
-    document.onreadystatechange = () => {
-      if (document.readyState === 'complete') {
-        this.isLoaded = true;
+    el: '#app',
+    template: '<App/>',
+    components: { App },
+    router,
+    data() {
+        return {
+            user: {} as User,
+            isLoaded: false as boolean
+        };
+    },
+    mounted(): void {
+        document.onreadystatechange = () => {
+            if (document.readyState === 'complete') {
+                this.isLoaded = true;
 
-        if (null !== window.user) {
-          this.user = window.user;
-        }
-      }
-    };
-  }
+                if (null !== window.user) {
+                    this.user = window.user;
+                }
+            }
+        };
+    }
 });

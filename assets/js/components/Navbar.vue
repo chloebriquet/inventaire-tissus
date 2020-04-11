@@ -26,7 +26,7 @@
                 <b-navbar-item tag="router-link" :to="{ name: 'profile' }">
                     Mon compte
                 </b-navbar-item>
-                <b-navbar-item href="#">
+                <b-navbar-item @click="logout">
                     Se déconnecter
                 </b-navbar-item>
             </b-navbar-dropdown>
@@ -55,6 +55,7 @@
 <script lang="ts">
     import Vue from 'vue';
     import User from '../models/user';
+    import { API } from '../http-common';
 
     export default Vue.extend({
         name: 'Navbar',
@@ -66,6 +67,20 @@
             isLoaded: {
                 type: Boolean,
                 default: false
+            }
+        },
+        methods: {
+            logout(): void {
+                API.post(window.location.origin + '/api/logout').finally(() => {
+                    this.$root.user = new User();
+                    this.$buefy.toast.open({
+                        duration: 5000,
+                        message: `Tu as bien été déconnecté !`,
+                        position: 'is-top',
+                        type: 'is-success',
+                        container: '#notification-container'
+                    });
+                });
             }
         }
     });

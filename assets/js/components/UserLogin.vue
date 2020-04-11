@@ -12,6 +12,14 @@
             </b-notification>
         </div>
         <div class="columns is-centered">
+            <div class="column is-one-third has-text-centered">
+                Pas encore de compte ?
+                <router-link :to="{ name: 'register' }"
+                    >Enregistre-toi !</router-link
+                >
+            </div>
+        </div>
+        <div class="columns is-centered">
             <form class="column is-one-third">
                 <b-field label="Identifiant">
                     <b-input v-model="form.username"></b-input>
