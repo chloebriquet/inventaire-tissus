@@ -1,0 +1,13 @@
+body {
+  min-height: 100vh;
+  background-image: url('../img/eva-blue-SfPOkp6-2eA-unsplash.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  padding: 1rem 1.5rem;
+}

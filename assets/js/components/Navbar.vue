@@ -1,7 +1,7 @@
 <template>
     <b-navbar type="is-success">
         <template slot="brand">
-            <b-navbar-item href="/">
+            <b-navbar-item tag="router-link" :to="{ name: 'home' }">
                 <b-icon icon="scissors-cutting" />
                 <div>Yards and Co.</div>
             </b-navbar-item>

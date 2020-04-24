@@ -12,7 +12,7 @@
             </b-notification>
         </div>
         <div class="columns is-centered">
-            <div class="column is-one-third has-text-centered">
+            <div class="column is-half has-text-centered">
                 Pas encore de compte ?
                 <router-link :to="{ name: 'register' }"
                     >Enregistre-toi !</router-link
@@ -20,22 +20,16 @@
             </div>
         </div>
         <div class="columns is-centered">
-            <form class="column is-one-third">
-                <b-field
-                    label="Identifiant"
-                    :message="form.username.error"
-                    :type="form.username.error ? 'is-danger' : ''"
-                >
-                    <b-input v-model="form.username.field"></b-input>
+            <form class="column is-half" @submit="login">
+                <b-field label="Identifiant" :message="form.username.error">
+                    <b-input v-model="form.username.field" required></b-input>
                 </b-field>
-                <b-field
-                    label="Mot de passe"
-                    :message="form.password.error"
-                    :type="form.password.error ? 'is-danger' : ''"
-                >
+                <b-field label="Mot de passe" :message="form.password.error">
                     <b-input
                         type="password"
                         v-model="form.password.field"
+                        password-reveal
+                        required
                     ></b-input>
                 </b-field>
                 <b-field>
@@ -44,9 +38,12 @@
                     </b-checkbox>
                 </b-field>
                 <div class="buttons is-centered">
-                    <b-button type="is-light" @click="login">
-                        Se connecter
-                    </b-button>
+                    <b-button
+                        tag="input"
+                        native-type="submit"
+                        type="is-light"
+                        value="Se connecter"
+                    />
                 </div>
             </form>
         </div>
@@ -76,25 +73,10 @@
             };
         },
         methods: {
-            login() {
-                this.form.username.error = '';
-                this.form.password.error = '';
+            login(event: Event) {
+                event.preventDefault();
 
-                if (!this.form.username.field || !this.form.password.field) {
-                    const error = 'Merci de renseigner ce champ.';
-
-                    if (!this.form.username.field) {
-                        this.form.username.error = error;
-                    }
-
-                    if (!this.form.password.field) {
-                        this.form.password.error = error;
-                    }
-
-                    return;
-                }
-
-                this.form.error = '';
+                this.resetErrors();
 
                 const formData: FormData = new FormData();
                 formData.append('username', this.form.username.field);
@@ -106,9 +88,7 @@
 
                 API.post('/login', formData)
                     .then(response => {
-                        this.$data.form.username = '';
-                        this.$data.form.password = '';
-                        this.$data.form.rememberMe = false;
+                        this.resetForm();
                         this.getUser(response.headers.location);
                         this.$router.push({ name: 'home' });
                     })
@@ -129,9 +109,30 @@
                             type: 'is-danger'
                         });
                     });
+            },
+            resetErrors(): void {
+                this.form.error = '';
+                this.form.username.error = '';
+                this.form.password.error = '';
+            },
+            resetFields(): void {
+                this.form.username.field = '';
+                this.form.password.field = '';
+                this.form.rememberMe = false;
+            },
+            resetForm(): void {
+                this.resetErrors();
+                this.resetFields();
             }
         }
     });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+    section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex-grow: 1;
+    }
+</style>

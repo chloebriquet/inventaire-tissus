@@ -1,7 +1,7 @@
 <template>
     <section class="section">
         <div class="columns is-centered">
-            <div class="column is-one-third has-text-centered">
+            <div class="column is-half has-text-centered">
                 Déjà un compte ?
                 <router-link :to="{ name: 'login' }"
                     >Connecte-toi !</router-link
@@ -9,20 +9,16 @@
             </div>
         </div>
         <div class="columns is-centered">
-            <form class="column is-one-third" @submit="register">
-                <b-field
-                    label="Identifiant"
-                    :message="form.username.error"
-                    :type="form.username.error ? 'is-danger' : ''"
-                >
-                    <b-input v-model="form.username.field"></b-input>
+            <form class="column is-half" @submit="register">
+                <b-field label="Identifiant" :message="form.username.error">
+                    <b-input v-model="form.username.field" required></b-input>
                 </b-field>
-                <b-field
-                    label="Email"
-                    :message="form.email.error"
-                    :type="form.email.error ? 'is-danger' : ''"
-                >
-                    <b-input type="email" v-model="form.email.field"></b-input>
+                <b-field label="Email" :message="form.email.error">
+                    <b-input
+                        type="email"
+                        v-model="form.email.field"
+                        required
+                    ></b-input>
                 </b-field>
                 <b-field
                     label="Confirmer l'email"
@@ -32,6 +28,7 @@
                     <b-input
                         type="email"
                         v-model="form.emailConfirmation.field"
+                        required
                     ></b-input>
                 </b-field>
                 <b-field
@@ -42,6 +39,8 @@
                     <b-input
                         type="password"
                         v-model="form.password.field"
+                        password-reveal
+                        required
                     ></b-input>
                 </b-field>
                 <b-field
@@ -52,19 +51,20 @@
                     <b-input
                         type="password"
                         v-model="form.passwordConfirmation.field"
+                        password-reveal
+                        required
                     ></b-input>
                 </b-field>
-                <b-field
-                    label="Code"
-                    :message="form.code.error"
-                    :type="form.code.error ? 'is-danger' : ''"
-                >
-                    <b-input v-model="form.code.field"></b-input>
+                <b-field label="Code" :message="form.code.error">
+                    <b-input v-model="form.code.field" required></b-input>
                 </b-field>
                 <div class="buttons is-centered">
-                    <b-field type="is-light">
-                        <b-input type="submit" value="S'enregistrer"></b-input>
-                    </b-field>
+                    <b-button
+                        tag="input"
+                        native-type="submit"
+                        type="is-light"
+                        value="S'enregistrer"
+                    />
                 </div>
             </form>
         </div>

@@ -17,22 +17,10 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 class LoginAuthenticator extends AbstractGuardAuthenticator
 {
-    /**
-     * @var UserRepository
-     */
-    private $userRepository;
-    /**
-     * @var RouterInterface
-     */
-    private $router;
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    private $passwordEncoder;
-    /**
-     * @var IriConverterInterface
-     */
-    private $iriConverter;
+    protected $userRepository;
+    protected $router;
+    protected $passwordEncoder;
+    protected $iriConverter;
 
     public function __construct(
         UserRepository $userRepository,
@@ -49,9 +37,7 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
     public function supports(Request $request)
     {
         return $request->isMethod('POST')
-            && 'login' === $request->attributes->get('_route')
-            && $request->request->get('username')
-            && $request->request->get('password');
+            && 'login' === $request->attributes->get('_route');
     }
 
     public function getCredentials(Request $request)
