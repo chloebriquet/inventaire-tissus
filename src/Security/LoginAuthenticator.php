@@ -49,7 +49,9 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
     public function supports(Request $request)
     {
         return $request->isMethod('POST')
-            && 'login' === $request->attributes->get('_route');
+            && 'login' === $request->attributes->get('_route')
+            && $request->request->get('username')
+            && $request->request->get('password');
     }
 
     public function getCredentials(Request $request)

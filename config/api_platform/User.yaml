@@ -1,6 +1,4 @@
 App\Entity\User:
-    attributes:
-        security: 'is_granted("ROLE_USER")'
     collectionOperations:
         get:
             normalization_context:
@@ -10,11 +8,11 @@ App\Entity\User:
             denormalization_context:
                 groups: ['user:write']
             validation_groups: ['Default', 'user:create']
-            security: 'is_granted("ROLE_ADMIN")'
     itemOperations:
         get:
             normalization_context:
                 groups: ['user:read']
+            security: 'is_granted("ROLE_USER")'
         put:
             denormalization_context:
                 groups: ['user:write']

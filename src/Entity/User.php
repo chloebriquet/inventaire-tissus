@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use App\Validator\Constraints\HasSameValue;
+use App\Validator\Constraints\IsInDatabase;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -14,6 +16,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @UniqueEntity("username")
  * @UniqueEntity("email")
+ * @HasSameValue(fields={"plainPassword", "passwordConfirmation"}, type="Le mot de passe", errorPath="passwordConfirmation", groups={"user:create"})
+ * @HasSameValue(fields={"email", "emailConfirmation"}, type="L'email", errorPath="emailConfirmation", groups={"user:create"})
  *
  * @ApiResource
  */
@@ -47,6 +51,14 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @var string
+     * @Assert\Email
+     * @Assert\NotBlank(groups={"user:create"})
+     */
+    private $emailConfirmation;
+
+    /**
+     * @var array
      * @ORM\Column(type="json")
      */
     private $roles = [];
@@ -58,9 +70,23 @@ class User implements UserInterface
     private $password;
 
     /**
+     * @var string
      * @Assert\NotBlank(groups={"user:create"})
      */
     private $plainPassword;
+
+    /**
+     * @var string
+     * @Assert\NotBlank(groups={"user:create"})
+     */
+    private $passwordConfirmation;
+
+    /**
+     * @var string
+     * @Assert\NotBlank(groups={"user:create"})
+     * @IsInDatabase(className="App:Code")
+     */
+    private $code;
 
     public function getUuid(): UuidInterface
     {
@@ -155,6 +181,42 @@ class User implements UserInterface
     public function setPlainPassword(string $plainPassword): self
     {
         $this->plainPassword = $plainPassword;
+
+        return $this;
+    }
+
+    public function getPasswordConfirmation(): ?string
+    {
+        return $this->passwordConfirmation;
+    }
+
+    public function setPasswordConfirmation(string $passwordConfirmation): self
+    {
+        $this->passwordConfirmation = $passwordConfirmation;
+
+        return $this;
+    }
+
+    public function getEmailConfirmation(): ?string
+    {
+        return $this->emailConfirmation;
+    }
+
+    public function setEmailConfirmation(string $emailConfirmation): self
+    {
+        $this->emailConfirmation = $emailConfirmation;
+
+        return $this;
+    }
+
+    public function getCode(): ?string
+    {
+        return $this->code;
+    }
+
+    public function setCode(string $code): self
+    {
+        $this->code = $code;
 
         return $this;
     }

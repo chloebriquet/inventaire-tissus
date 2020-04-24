@@ -6,8 +6,14 @@ App\Entity\User:
             groups: ['user:read', 'user:write']
         email:
             groups: ['user:read', 'user:write']
+        emailConfirmation:
+            groups: ['user:write']
         roles:
             groups: ['user:read', 'user:write']
         plainPassword:
             serialized_name: password
+            groups: ['user:write']
+        passwordConfirmation:
+            groups: ['user:write']
+        code:
             groups: ['user:write']

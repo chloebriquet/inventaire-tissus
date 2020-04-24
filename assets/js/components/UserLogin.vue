@@ -21,11 +21,22 @@
         </div>
         <div class="columns is-centered">
             <form class="column is-one-third">
-                <b-field label="Identifiant">
-                    <b-input v-model="form.username"></b-input>
+                <b-field
+                    label="Identifiant"
+                    :message="form.username.error"
+                    :type="form.username.error ? 'is-danger' : ''"
+                >
+                    <b-input v-model="form.username.field"></b-input>
                 </b-field>
-                <b-field label="Mot de passe">
-                    <b-input type="password" v-model="form.password"></b-input>
+                <b-field
+                    label="Mot de passe"
+                    :message="form.password.error"
+                    :type="form.password.error ? 'is-danger' : ''"
+                >
+                    <b-input
+                        type="password"
+                        v-model="form.password.field"
+                    ></b-input>
                 </b-field>
                 <b-field>
                     <b-checkbox v-model="form.rememberMe" class="is-small">
@@ -51,8 +62,14 @@
         data() {
             return {
                 form: {
-                    username: '' as string,
-                    password: '' as string,
+                    username: {
+                        field: '' as string,
+                        error: '' as string
+                    },
+                    password: {
+                        field: '' as string,
+                        error: '' as string
+                    },
                     rememberMe: false as boolean,
                     error: '' as string
                 }
@@ -60,11 +77,28 @@
         },
         methods: {
             login() {
+                this.form.username.error = '';
+                this.form.password.error = '';
+
+                if (!this.form.username.field || !this.form.password.field) {
+                    const error = 'Merci de renseigner ce champ.';
+
+                    if (!this.form.username.field) {
+                        this.form.username.error = error;
+                    }
+
+                    if (!this.form.password.field) {
+                        this.form.password.error = error;
+                    }
+
+                    return;
+                }
+
                 this.form.error = '';
 
                 const formData: FormData = new FormData();
-                formData.append('username', this.form.username);
-                formData.append('password', this.form.password);
+                formData.append('username', this.form.username.field);
+                formData.append('password', this.form.password.field);
                 formData.append(
                     '_remember_me',
                     this.form.rememberMe ? 'on' : ''
@@ -79,7 +113,7 @@
                         this.$router.push({ name: 'home' });
                     })
                     .catch(error => {
-                        this.form.error = error.response.data.error;
+                        this.form.error = error;
                     });
             },
             getUser(uri: string) {
