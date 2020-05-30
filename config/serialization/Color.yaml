@@ -1,0 +1,8 @@
+App\Entity\Color:
+    attributes:
+        id:
+            groups: ['color:read']
+        name:
+            groups: ['color:read', 'color:write', 'fabric:read']
+        code:
+            groups: ['color:read', 'color:write']

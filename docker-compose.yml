@@ -1,34 +1,41 @@
-version: '2'
+version: '3.5'
 
 services:
-  apache_php:
-    image: lavoweb/php-7.3
-    container_name: inventaire_apache_php
-    ports:
-      - "80:80"
-    volumes:
-      - ./.docker/config/vhosts:/etc/apache2/sites-enabled
-      - .:/var/www/html
-    links:
-      - db:db
+    apache_php:
+        build: .docker/apache_php
+        container_name: apache_php
+        ports:
+            - 80:80
+        volumes:
+            - .docker/config/vhosts:/etc/apache2/sites-enabled
+            - .:/var/www/html
 
-  db:
-    image: mariadb/server:10.4
-    container_name: inventaire_db
-    volumes:
-      - ./.docker/data/mysql:/var/lib/mysql
-    ports:
-      - "3306:3306"
-    environment:
-      MARIADB_DATABASE: inventaire_tissus
-      MARIADB_ROOT_PASSWORD: root
-      MARIADB_USER: db
-      MARIADB_PASSWORD: db
+    db:
+        image: mariadb/server:10.4
+        container_name: mariadb
+        environment:
+            MARIADB_DATABASE: mercure
+            MARIADB_ROOT_PASSWORD: root
+            MARIADB_USER: db
+            MARIADB_PASSWORD: db
+        ports:
+            - 3306:3306
+        volumes:
+            - .docker/data/mysql:/var/lib/mysql
 
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    container_name: inventaire_phpmyadmin
-    ports:
-      - "8080:80"
-    links:
-      - db:db
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: phpmyadmin
+        environment:
+            PMA_HOST: mariadb
+            PMA_PORT: 3306
+            PMA_USER: root
+            PMA_PASSWORD: root
+        ports:
+            - 3002:80
+        depends_on:
+            - db
+
+    dockerize:
+        image: jwilder/dockerize
+        container_name: dockerize

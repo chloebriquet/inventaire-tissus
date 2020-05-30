@@ -1,0 +1,18 @@
+App\Entity\Color:
+    attributes:
+        security: 'is_granted("ROLE_USER")'
+    collectionOperations:
+        get:
+            normalization_context:
+                groups: ['color:read']
+        post:
+            denormalization_context:
+                groups: ['color:write']
+    itemOperations:
+        get:
+            normalization_context:
+                groups: ['color:read']
+        put:
+            denormalization_context:
+                groups: ['color:write']
+        delete: ~

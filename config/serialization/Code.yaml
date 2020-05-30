@@ -1,0 +1,6 @@
+App\Entity\Code:
+    attributes:
+        id:
+            groups: ['code:read']
+        name:
+            groups: ['code:read', 'code:write']

@@ -1,0 +1,22 @@
+App\Entity\Fabric:
+    attributes:
+        id:
+            groups: ['fabric:read']
+        box:
+            groups: ['fabric:read', 'fabric:write', 'color:read']
+        material:
+            groups: ['fabric:read', 'fabric:write', 'color:read']
+        pattern:
+            groups: ['fabric:read', 'fabric:write', 'color:read']
+        state:
+            groups: ['fabric:read', 'fabric:write']
+        thickness:
+            groups: ['fabric:read', 'fabric:write']
+        width:
+            groups: ['fabric:read', 'fabric:write']
+        length:
+            groups: ['fabric:read', 'fabric:write']
+        comment:
+            groups: ['fabric:read', 'fabric:write']
+        colors:
+            groups: ['fabric:read', 'fabric:write']
