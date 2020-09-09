@@ -1,5 +1,5 @@
 DOCKER_DIR            = .docker
-DOCKER_COMPOSE        = docker-compose
+DOCKER_COMPOSE        = cd ${DOCKER_DIR} && docker-compose
 
 EXEC_PHP_CONTAINER    = ${DOCKER_DIR}/bin/docker-php
 ECHO                  = ${DOCKER_DIR}/bin/display-job-title
