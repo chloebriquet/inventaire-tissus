@@ -29,6 +29,8 @@
                         type="email"
                         v-model="form.emailConfirmation.field"
                         required
+                        @click.right.native.prevent
+                        @paste.native.prevent
                     ></b-input>
                 </b-field>
                 <b-field
@@ -53,6 +55,8 @@
                         v-model="form.passwordConfirmation.field"
                         password-reveal
                         required
+                        @click.right.native.prevent
+                        @paste.native.prevent
                     ></b-input>
                 </b-field>
                 <b-field label="Code" :message="form.code.error">
@@ -116,8 +120,7 @@
                             duration: 3000,
                             message: `L'enregistrement a bien été effectué.`,
                             position: 'is-top',
-                            type: 'is-info',
-                            container: '#notification-container'
+                            type: 'is-info'
                         });
                         this.$router.push({ name: 'login' });
                     })
@@ -136,8 +139,7 @@
                                 duration: 5000,
                                 message: `Un problème est survenu lors de l'enregistrement. Merci de t'adresser à l'administratrice du site (à savoir Chloé).`,
                                 position: 'is-bottom',
-                                type: 'is-danger',
-                                container: '#notification-container'
+                                type: 'is-danger'
                             });
                         }
                     });

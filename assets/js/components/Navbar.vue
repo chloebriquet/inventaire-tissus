@@ -77,8 +77,7 @@
                         duration: 3000,
                         message: `Tu as bien été déconnecté·e !`,
                         position: 'is-top',
-                        type: 'is-info',
-                        container: '#notification-container'
+                        type: 'is-info'
                     });
                 });
             }

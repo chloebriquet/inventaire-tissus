@@ -22,12 +22,12 @@
         <div class="columns is-centered">
             <form class="column is-half" @submit="login">
                 <b-field label="Identifiant">
-                    <b-input v-model="form.username.field" required></b-input>
+                    <b-input v-model="form.username" required></b-input>
                 </b-field>
                 <b-field label="Mot de passe">
                     <b-input
                         type="password"
-                        v-model="form.password.field"
+                        v-model="form.password"
                         password-reveal
                         required
                     ></b-input>
@@ -100,8 +100,7 @@
                             duration: 5000,
                             message: `Un problème est survenu lors de la récupération de l'utilisateur. Merci de t'adresser à l'administratrice du site (à savoir Chloé).`,
                             position: 'is-bottom',
-                            type: 'is-danger',
-                            container: '#notification-container'
+                            type: 'is-danger'
                         });
                     });
             },

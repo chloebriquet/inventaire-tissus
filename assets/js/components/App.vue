@@ -1,7 +1,6 @@
 <template>
     <div id="app">
         <Navbar :user="$root.user" :is-loaded="$root.isLoaded" />
-        <div id="notification-container"></div>
         <div class="columns is-centered">
             <div class="main column is-two-thirds">
                 <router-view></router-view>
@@ -27,13 +26,6 @@
         flex-grow: 1;
         display: flex;
         flex-direction: column;
-    }
-
-    #notification-container {
-        position: fixed;
-        top: 3.25rem;
-        width: 100vw;
-        height: calc(100vh - 5rem);
     }
 
     .columns {
