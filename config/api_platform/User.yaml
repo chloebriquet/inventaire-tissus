@@ -16,6 +16,6 @@ App\Entity\User:
         put:
             denormalization_context:
                 groups: ['user:write']
-            security: 'is_granted("ROLE_ADMIN") or object == user'
+            security: 'is_granted("ROLE_USER") and object == user'
         delete:
-            security: 'is_granted("ROLE_ADMIN") or object == user'
+            security: 'is_granted("ROLE_ADMIN")'

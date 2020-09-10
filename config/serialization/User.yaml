@@ -9,7 +9,7 @@ App\Entity\User:
         emailConfirmation:
             groups: ['user:write']
         roles:
-            groups: ['user:read', 'user:write']
+            groups: ['admin:write']
         plainPassword:
             serialized_name: password
             groups: ['user:write']
