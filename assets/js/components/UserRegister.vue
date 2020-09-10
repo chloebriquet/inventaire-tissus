@@ -41,6 +41,8 @@
                     <b-input
                         type="password"
                         v-model="form.password.field"
+                        pattern="^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9!#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}$"
+                        validation-message="Le mot de passe doit contenir au moins 8 caractères dont une lettre, un chiffre et un caractère spécial (à l'exception de &quot; et ')."
                         password-reveal
                         required
                     ></b-input>

@@ -72,6 +72,7 @@ class User implements UserInterface
     /**
      * @var string
      * @Assert\NotBlank(groups={"user:create"})
+     * @Assert\Regex("/^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9!#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}$/")
      */
     private $plainPassword;
 
