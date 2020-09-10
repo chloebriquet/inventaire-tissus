@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Code;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method null|Code find($id, $lockMode = null, $lockVersion = null)

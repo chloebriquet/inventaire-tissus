@@ -6,7 +6,7 @@ use App\Entity\Fabric;
 use App\Repository\ColorRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
 
 class FabricFixtures extends Fixture implements DependentFixtureInterface
