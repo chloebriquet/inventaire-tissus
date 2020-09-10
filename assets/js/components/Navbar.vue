@@ -74,10 +74,10 @@
                 API.post(window.location.origin + '/api/logout').finally(() => {
                     this.$root.user = new User();
                     this.$buefy.toast.open({
-                        duration: 5000,
-                        message: `Tu as bien été déconnecté !`,
+                        duration: 3000,
+                        message: `Tu as bien été déconnecté·e !`,
                         position: 'is-top',
-                        type: 'is-success',
+                        type: 'is-info',
                         container: '#notification-container'
                     });
                 });

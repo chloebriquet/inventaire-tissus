@@ -21,10 +21,10 @@
         </div>
         <div class="columns is-centered">
             <form class="column is-half" @submit="login">
-                <b-field label="Identifiant" :message="form.username.error">
+                <b-field label="Identifiant">
                     <b-input v-model="form.username.field" required></b-input>
                 </b-field>
-                <b-field label="Mot de passe" :message="form.password.error">
+                <b-field label="Mot de passe">
                     <b-input
                         type="password"
                         v-model="form.password.field"
@@ -59,14 +59,8 @@
         data() {
             return {
                 form: {
-                    username: {
-                        field: '' as string,
-                        error: '' as string
-                    },
-                    password: {
-                        field: '' as string,
-                        error: '' as string
-                    },
+                    username: '' as string,
+                    password: '' as string,
                     rememberMe: false as boolean,
                     error: '' as string
                 }
@@ -76,11 +70,11 @@
             login(event: Event) {
                 event.preventDefault();
 
-                this.resetErrors();
+                this.resetError();
 
                 const formData: FormData = new FormData();
-                formData.append('username', this.form.username.field);
-                formData.append('password', this.form.password.field);
+                formData.append('username', this.form.username);
+                formData.append('password', this.form.password);
                 formData.append(
                     '_remember_me',
                     this.form.rememberMe ? 'on' : ''
@@ -106,22 +100,21 @@
                             duration: 5000,
                             message: `Un problème est survenu lors de la récupération de l'utilisateur. Merci de t'adresser à l'administratrice du site (à savoir Chloé).`,
                             position: 'is-bottom',
-                            type: 'is-danger'
+                            type: 'is-danger',
+                            container: '#notification-container'
                         });
                     });
             },
-            resetErrors(): void {
+            resetError(): void {
                 this.form.error = '';
-                this.form.username.error = '';
-                this.form.password.error = '';
             },
             resetFields(): void {
-                this.form.username.field = '';
-                this.form.password.field = '';
+                this.form.username = '';
+                this.form.password = '';
                 this.form.rememberMe = false;
             },
             resetForm(): void {
-                this.resetErrors();
+                this.resetError();
                 this.resetFields();
             }
         }

@@ -33,8 +33,7 @@
         position: fixed;
         top: 3.25rem;
         width: 100vw;
-        height: 100vh;
-        z-index: -10;
+        height: calc(100vh - 5rem);
     }
 
     .columns {

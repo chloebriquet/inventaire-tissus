@@ -10,7 +10,7 @@
         </div>
         <div class="columns is-centered">
             <form class="column is-half" @submit="register">
-                <b-field label="Identifiant" :message="form.username.error">
+                <b-field label="Identifiant" :message="form.username.error" :type="form.username.error ? 'is-danger' : ''">
                     <b-input v-model="form.username.field" required></b-input>
                 </b-field>
                 <b-field label="Email" :message="form.email.error">
@@ -74,83 +74,89 @@
 <script lang="ts">
     import Vue from 'vue';
     import { API } from '../http-common';
+    import Violation from "../types/violation";
+    import FormField from "../types/formField";
 
     export default Vue.extend({
         name: 'Register',
         data() {
             return {
                 form: {
-                    username: {
-                        field: '' as string,
-                        error: '' as string
-                    },
-                    email: {
-                        field: '' as string,
-                        error: '' as string
-                    },
-                    emailConfirmation: {
-                        field: '' as string,
-                        error: '' as string
-                    },
-                    password: {
-                        field: '' as string,
-                        error: '' as string
-                    },
-                    passwordConfirmation: {
-                        field: '' as string,
-                        error: '' as string
-                    },
-                    code: {
-                        field: '' as string,
-                        error: '' as string
-                    },
+                    username: new FormField(),
+                    email: new FormField(),
+                    emailConfirmation: new FormField(),
+                    password: new FormField(),
+                    passwordConfirmation: new FormField(),
+                    code: new FormField(),
                     error: '' as string
-                }
+                } as {[key: string]: any}
             };
         },
         methods: {
             register(event: Event) {
                 event.preventDefault();
-                this.form.error = '';
 
-                const formData = {
-                    username: this.form.username.field as string,
-                    email: this.form.email.field as string,
+                this.resetErrors();
+
+                const formData: {[key: string]: string} = {
+                    username: this.form.username.field,
+                    email: this.form.email.field,
                     emailConfirmation: this.form.emailConfirmation
-                        .field as string,
-                    password: this.form.password.field as string,
+                        .field,
+                    password: this.form.password.field,
                     passwordConfirmation: this.form.passwordConfirmation
-                        .field as string,
-                    code: this.form.code.field as string
+                        .field,
+                    code: this.form.code.field
                 };
 
                 API.post('/users', formData)
                     .then(response => {
                         this.resetForm();
+                        this.$buefy.toast.open({
+                            duration: 3000,
+                            message: `L'enregistrement a bien été effectué.`,
+                            position: 'is-top',
+                            type: 'is-info',
+                            container: '#notification-container'
+                        });
                         this.$router.push({ name: 'login' });
                     })
                     .catch(error => {
-                        console.error(error);
+                        const status = error.response.status;
+
+                        if (400 === status) {
+                            const data = error.response.data;
+                            data.violations.forEach((violation: Violation) => {
+                                if (violation.propertyPath in this.form) {
+                                    this.form[violation.propertyPath].error += violation.message + ' ';
+                                }
+                            });
+                        } else {
+                            this.$buefy.notification.open({
+                                duration: 5000,
+                                message: `Un problème est survenu lors de l'enregistrement. Merci de t'adresser à l'administratrice du site (à savoir Chloé).`,
+                                position: 'is-bottom',
+                                type: 'is-danger',
+                                container: '#notification-container'
+                            });
+                        }
                     });
             },
+            resetErrors(): void {
+                this.form.username.resetError();
+                this.form.email.resetError();
+                this.form.emailConfirmation.resetError();
+                this.form.password.resetError();
+                this.form.passwordConfirmation.resetError();
+                this.form.code.resetError();
+            },
             resetForm(): void {
-                this.form.username.field = '';
-                this.form.username.error = '';
-
-                this.form.email.field = '';
-                this.form.email.error = '';
-
-                this.form.emailConfirmation.field = '';
-                this.form.emailConfirmation.error = '';
-
-                this.form.password.field = '';
-                this.form.password.error = '';
-
-                this.form.passwordConfirmation.field = '';
-                this.form.passwordConfirmation.error = '';
-
-                this.form.code.field = '';
-                this.form.code.error = '';
+                this.form.username.field = new FormField();
+                this.form.email.field = new FormField();
+                this.form.emailConfirmation.field = new FormField();
+                this.form.password.field = new FormField();
+                this.form.passwordConfirmation.field = new FormField();
+                this.form.code.field = new FormField();
             }
         }
     });
