@@ -10,7 +10,11 @@
         </div>
         <div class="columns is-centered">
             <form class="column is-half" @submit="register">
-                <b-field label="Identifiant" :message="form.username.error" :type="form.username.error ? 'is-danger' : ''">
+                <b-field
+                    label="Identifiant"
+                    :message="form.username.error"
+                    :type="form.username.error ? 'is-danger' : ''"
+                >
                     <b-input v-model="form.username.field" required></b-input>
                 </b-field>
                 <b-field label="Email" :message="form.email.error">
@@ -80,8 +84,8 @@
 <script lang="ts">
     import Vue from 'vue';
     import { API } from '../http-common';
-    import Violation from "../types/violation";
-    import FormField from "../types/formField";
+    import Violation from '../types/violation';
+    import FormField from '../types/formField';
 
     export default Vue.extend({
         name: 'Register',
@@ -95,7 +99,7 @@
                     passwordConfirmation: new FormField(),
                     code: new FormField(),
                     error: '' as string
-                } as {[key: string]: any}
+                } as { [key: string]: any }
             };
         },
         methods: {
@@ -104,14 +108,12 @@
 
                 this.resetErrors();
 
-                const formData: {[key: string]: string} = {
+                const formData: { [key: string]: string } = {
                     username: this.form.username.field,
                     email: this.form.email.field,
-                    emailConfirmation: this.form.emailConfirmation
-                        .field,
+                    emailConfirmation: this.form.emailConfirmation.field,
                     password: this.form.password.field,
-                    passwordConfirmation: this.form.passwordConfirmation
-                        .field,
+                    passwordConfirmation: this.form.passwordConfirmation.field,
                     code: this.form.code.field
                 };
 
@@ -133,7 +135,8 @@
                             const data = error.response.data;
                             data.violations.forEach((violation: Violation) => {
                                 if (violation.propertyPath in this.form) {
-                                    this.form[violation.propertyPath].error += violation.message + ' ';
+                                    this.form[violation.propertyPath].error +=
+                                        violation.message + ' ';
                                 }
                             });
                         } else {

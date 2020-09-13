@@ -27,7 +27,7 @@ Encore
     //.addEntry('page1', './assets/js/page1.js')
     //.addEntry('page2', './assets/js/page2.js')
 
-    .enableVueLoader()
+    .enableVueLoader(() => {}, { runtimeCompilerBuild: false })
     .enableSassLoader()
     .enableTypeScriptLoader(config => {
         config.appendTsSuffixTo = [/\.vue$/];

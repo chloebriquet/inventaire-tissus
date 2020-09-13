@@ -1,4 +1,4 @@
 export default interface Violation {
-    propertyPath: string,
-    message: string,
+    propertyPath: string;
+    message: string;
 }
