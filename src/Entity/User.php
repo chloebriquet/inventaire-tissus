@@ -4,7 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Validator\Constraints\HasSameValue;
-use App\Validator\Constraints\IsInDatabase;
+use App\Validator\Constraints\IsCodeAvailable;
 use Doctrine\ORM\Mapping as ORM;
 use Ramsey\Uuid\UuidInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -85,7 +85,7 @@ class User implements UserInterface
     /**
      * @var string
      * @Assert\NotBlank(groups={"user:create"})
-     * @IsInDatabase(className="App:Code")
+     * @IsCodeAvailable
      */
     private $code;
 

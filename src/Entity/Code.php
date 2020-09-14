@@ -27,6 +27,11 @@ class Code
      */
     private $name;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $used_at;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -40,6 +45,18 @@ class Code
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getUsedAt(): ?\DateTimeInterface
+    {
+        return $this->used_at;
+    }
+
+    public function setUsedAt(?\DateTimeInterface $used_at): self
+    {
+        $this->used_at = $used_at;
 
         return $this;
     }

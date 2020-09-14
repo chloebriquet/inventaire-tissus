@@ -2,13 +2,14 @@
 
 namespace App\Validator\Constraints;
 
+use App\Entity\Code;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\ConstraintDefinitionException;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
-class IsInDatabaseValidator extends ConstraintValidator
+class IsCodeAvailableValidator extends ConstraintValidator
 {
     protected $registry;
 
@@ -19,8 +20,8 @@ class IsInDatabaseValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
-        if (!$constraint instanceof IsInDatabase) {
-            throw new UnexpectedTypeException($constraint, IsInDatabase::class);
+        if (!$constraint instanceof IsCodeAvailable) {
+            throw new UnexpectedTypeException($constraint, IsCodeAvailable::class);
         }
 
         if (is_null($value) || '' === $value) {
@@ -31,16 +32,20 @@ class IsInDatabaseValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, 'string');
         }
 
-        $em = $this->registry->getManagerForClass($constraint->className);
+        $this->registry->getManager();
+        $em = $this->registry->getManagerForClass(Code::class);
 
         if (!$em) {
             throw new ConstraintDefinitionException(sprintf('Impossible de trouver le gestionnaire d\'objets associé à une entité de class "%s".', $constraint->className));
         }
 
-        $repository = $em->getRepository($constraint->className);
-        $result = $repository->findBy([$constraint->property => $value]);
+        $repository = $em->getRepository(Code::class);
+        $code = $repository->findOneBy([
+            'name' => $value,
+            'used_at' => null,
+        ]);
 
-        if ($result) {
+        if (null !== $code) {
             return;
         }
 
