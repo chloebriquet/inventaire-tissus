@@ -36,20 +36,17 @@ class IsCodeAvailableValidator extends ConstraintValidator
         $em = $this->registry->getManagerForClass(Code::class);
 
         if (!$em) {
-            throw new ConstraintDefinitionException(sprintf('Impossible de trouver le gestionnaire d\'objets associé à une entité de class "%s".', $constraint->className));
+            throw new ConstraintDefinitionException(sprintf('Impossible de trouver le gestionnaire d\'objets associé à une entité de class "%s".', Code::class));
         }
 
         $repository = $em->getRepository(Code::class);
-        $code = $repository->findOneBy([
-            'name' => $value,
-            'used_at' => null,
-        ]);
+        $code = $repository->findUnusedCode($value);
 
         if (null !== $code) {
             return;
         }
 
-        $this->context->buildViolation($constraint->messsage)
+        $this->context->buildViolation($constraint->message)
             ->setParameter('{{ value }}', $value)
             ->addViolation();
     }

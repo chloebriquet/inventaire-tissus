@@ -19,32 +19,11 @@ class CodeRepository extends ServiceEntityRepository
         parent::__construct($registry, Code::class);
     }
 
-    // /**
-    //  * @return Code[] Returns an array of Code objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findUnusedCode(string $name): ?Code
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        return $this->findOneBy([
+            'name' => $name,
+            'used_at' => null,
+        ]);
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Code
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

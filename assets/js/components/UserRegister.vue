@@ -13,11 +13,11 @@
                 <b-field
                     label="Identifiant"
                     :message="form.username.error"
-                    :type="form.username.error ? 'is-danger' : ''"
+                    :type="{ 'is-danger': form.username.error }"
                 >
                     <b-input v-model="form.username.field" required></b-input>
                 </b-field>
-                <b-field label="Email" :message="form.email.error">
+                <b-field label="Email" :message="form.email.error" :type="{ 'is-danger': form.email.error }">
                     <b-input
                         type="email"
                         v-model="form.email.field"
@@ -27,7 +27,7 @@
                 <b-field
                     label="Confirmer l'email"
                     :message="form.emailConfirmation.error"
-                    :type="form.emailConfirmation.error ? 'is-danger' : ''"
+                    :type="{ 'is-danger': form.emailConfirmation.error }"
                 >
                     <b-input
                         type="email"
@@ -40,7 +40,7 @@
                 <b-field
                     label="Mot de passe"
                     :message="form.password.error"
-                    :type="form.password.error ? 'is-danger' : ''"
+                    :type="{ 'is-danger': form.password.error }"
                 >
                     <b-input
                         type="password"
@@ -54,7 +54,7 @@
                 <b-field
                     label="Confirmer le mot de passe"
                     :message="form.passwordConfirmation.error"
-                    :type="form.passwordConfirmation.error ? 'is-danger' : ''"
+                    :type="{ 'is-danger': form.passwordConfirmation.error }"
                 >
                     <b-input
                         type="password"
@@ -65,7 +65,7 @@
                         @paste.native.prevent
                     ></b-input>
                 </b-field>
-                <b-field label="Code" :message="form.code.error">
+                <b-field label="Code" :message="form.code.error" :type="{ 'is-danger': form.code.error }">
                     <b-input v-model="form.code.field" required></b-input>
                 </b-field>
                 <div class="buttons is-centered">

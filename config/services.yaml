@@ -41,8 +41,13 @@ services:
         arguments:
             $webcolors: '%webcolors%'
 
-    kernel.listener.doctrine:
-        class: App\Listener\DeletedListener
-        public: false
+    App\Listener\DeletedListener:
         tags:
-            - { name: doctrine.event_listener, event: onFlush, method: onFlush }
+            - name: 'doctrine.event_listener'
+              event: 'onFlush'
+
+    App\Listener\UserCreatedListener:
+        tags:
+            - name: 'doctrine.orm.entity_listener'
+              event: 'prePersist'
+              entity: 'App\Entity\User'
