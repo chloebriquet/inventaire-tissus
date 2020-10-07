@@ -10,14 +10,14 @@ class SecurityController extends AbstractController
     /**
      * @Route("/api/login", name="login", methods={"POST"})
      */
-    public function login()
+    public function login(): void
     {
     }
 
     /**
      * @Route("/api/logout", name="logout")
      */
-    public function logout()
+    public function logout(): void
     {
     }
 }

@@ -11,10 +11,10 @@ class UserCreatedListener
     public function prePersist(User $user, LifecycleEventArgs $args): void
     {
         $repository = $args->getEntityManager()->getRepository(Code::class);
-        $code = $repository->findUnusedCode($user->getCode());
+        $code = $repository->findUnusedCode($user->code);
 
         if (null !== $code) {
-            $code->setUsedAt(new \DateTimeImmutable());
+            $code->usedAt = new \DateTimeImmutable();
         }
     }
 }

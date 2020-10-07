@@ -40,12 +40,12 @@
                 <b-field
                     label="Mot de passe"
                     :message="form.password.error"
-                    :type="{ 'is-danger': form.password.error || !isPasswordValid }"
+                    :type="{ 'is-danger': form.password.error }"
                 >
                     <b-input
                         type="password"
                         v-model="form.password.field"
-                        :pattern="regex"
+                        pattern="^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9!#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}$"
                         validation-message="Le mot de passe doit contenir au moins 8 caractères dont une lettre, un chiffre et un caractère spécial (à l'exception de &quot; et ')."
                         password-reveal
                         required
@@ -91,7 +91,6 @@
         name: 'Register',
         data() {
             return {
-                regex: '^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9!#\\$%&\'\\(\\)\\*\\+,-\\.\\/:;<=>\\?@[\\]\\^_`\\{\\|}~]{8,}$' as string,
                 form: {
                     username: new FormField(),
                     email: new FormField(),
@@ -102,14 +101,6 @@
                     error: '' as string
                 } as { [key: string]: any }
             };
-        },
-        computed: {
-            isPasswordValid(): boolean {
-                const password = this.form.password.field;
-
-                return '' === password ||
-                    RegExp(this.regex).test(password);
-            }
         },
         methods: {
             register(event: Event) {

@@ -11,32 +11,28 @@ use Faker\Factory;
 
 class FabricFixtures extends Fixture implements DependentFixtureInterface
 {
-    /** @var ColorRepository */
-    private $colorRepository;
+    protected ColorRepository $colorRepository;
 
-    /**
-     * FabricFixtures constructor.
-     */
     public function __construct(ColorRepository $colorRepository)
     {
         $this->colorRepository = $colorRepository;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
         $colors = $this->colorRepository->findAll();
 
         for ($i = 0; $i < 30; ++$i) {
             $fabric = new Fabric();
-            $fabric->setBox(rand(1, 30));
-            $fabric->setMaterial($faker->word);
-            $fabric->setPattern($faker->word);
-            $fabric->setState($faker->word);
-            $fabric->setThickness($faker->word);
-            $fabric->setWidth(rand(100, 500));
-            $fabric->setLength(rand(100, 500));
-            $fabric->setComment($faker->words(5, true));
+            $fabric->box = rand(1, 30);
+            $fabric->material = $faker->word;
+            $fabric->pattern = $faker->word;
+            $fabric->state = $faker->word;
+            $fabric->thickness = $faker->word;
+            $fabric->width = rand(100, 500);
+            $fabric->length = rand(100, 500);
+            $fabric->comment = $faker->words(5, true);
             $fabric->addColor($colors[rand(0, 19)]);
 
             $manager->persist($fabric);

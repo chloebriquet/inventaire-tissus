@@ -9,8 +9,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserDataPersister implements DataPersisterInterface
 {
-    private $entityManager;
-    private $userPasswordEncoder;
+    protected EntityManagerInterface $entityManager;
+    protected UserPasswordEncoderInterface $userPasswordEncoder;
 
     public function __construct(EntityManagerInterface $entityManager, UserPasswordEncoderInterface $userPasswordEncoder)
     {
@@ -26,12 +26,10 @@ class UserDataPersister implements DataPersisterInterface
     /**
      * @param User $data
      */
-    public function persist($data)
+    public function persist($data): void
     {
-        if ($data->getPlainPassword()) {
-            $data->setPassword(
-                $this->userPasswordEncoder->encodePassword($data, $data->getPlainPassword())
-            );
+        if ($data->plainPassword) {
+            $data->password = $this->userPasswordEncoder->encodePassword($data, $data->plainPassword);
             $data->eraseCredentials();
         }
 
@@ -39,7 +37,7 @@ class UserDataPersister implements DataPersisterInterface
         $this->entityManager->flush();
     }
 
-    public function remove($data)
+    public function remove($data): void
     {
         $this->entityManager->remove($data);
         $this->entityManager->flush();

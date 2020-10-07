@@ -6,7 +6,7 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 
 class DeletedListener
 {
-    public function onFlush(OnFlushEventArgs $eventArgs)
+    public function onFlush(OnFlushEventArgs $eventArgs): void
     {
         $em = $eventArgs->getEntityManager();
         $uow = $em->getUnitOfWork();

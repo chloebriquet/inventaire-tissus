@@ -18,10 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-    /**
-     * @var UuidEncoder
-     */
-    protected $uuidEncoder;
+    protected UuidEncoder $uuidEncoder;
 
     public function __construct(ManagerRegistry $registry, UuidEncoder $uuidEncoder)
     {
@@ -38,12 +35,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             throw new UnsupportedUserException(sprintf('Instances of "%s" are not supported.', \get_class($user)));
         }
 
-        $user->setPassword($newEncodedPassword);
+        $user->password = $newEncodedPassword;
         $this->_em->persist($user);
         $this->_em->flush();
     }
 
-    public function findOneByEncodedUuid(string $encodedUuid)
+    public function findOneByEncodedUuid(string $encodedUuid): ?User
     {
         return $this->findOneBy([
             'uuid' => $this->uuidEncoder->decode($encodedUuid),

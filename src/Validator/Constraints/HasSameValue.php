@@ -9,17 +9,17 @@ use Symfony\Component\Validator\Constraint;
  */
 class HasSameValue extends Constraint
 {
-    public $type = '';
-    public $message = 'has_same_value';
-    public $fields = [];
-    public $errorPath = '';
+    public string $type = '';
+    public string $message = 'has_same_value';
+    public array $fields = [];
+    public string $errorPath = '';
 
-    public function getTargets()
+    public function getTargets(): string
     {
         return self::CLASS_CONSTRAINT;
     }
 
-    public function getRequiredOptions()
+    public function getRequiredOptions(): array
     {
         return ['fields', 'type'];
     }

@@ -9,10 +9,14 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class HasSameValueValidator extends ConstraintValidator
 {
-    public function validate($entity, Constraint $constraint)
+    public function validate($entity, Constraint $constraint): void
     {
         if (!$constraint instanceof HasSameValue) {
             throw new UnexpectedTypeException($constraint, HasSameValue::class);
+        }
+
+        if (null === $entity) {
+            return;
         }
 
         if (!is_array($constraint->fields)) {
@@ -23,14 +27,10 @@ class HasSameValueValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint->errorPath, 'string or null');
         }
 
-        $fields = (array) $constraint->fields;
+        $fields = $constraint->fields;
 
         if (2 !== count($fields)) {
             throw new ConstraintDefinitionException('Au moins et seulement 2 champs doivent être comparés.');
-        }
-
-        if (null === $entity) {
-            return;
         }
 
         $className = get_class($entity);
@@ -39,8 +39,8 @@ class HasSameValueValidator extends ConstraintValidator
 
         foreach ($fields as $fieldName) {
             try {
-                $method = new \ReflectionMethod($className, 'get'.$fieldName);
-                $comparedValues[$fieldName] = $method->invoke($entity);
+                $property = new \ReflectionProperty($className, $fieldName);
+                $comparedValues[$fieldName] = $property->getValue($entity);
             } catch (\ReflectionException $exception) {
                 throw new ConstraintDefinitionException(sprintf('La classe "%s" ou le champ "%s" n\'existent pas, le champ ne peut donc pas être comparé.', get_class($entity), $fieldName));
             }

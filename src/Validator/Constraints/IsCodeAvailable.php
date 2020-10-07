@@ -9,5 +9,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class IsCodeAvailable extends Constraint
 {
-    public $message = 'code';
+    public string $message = 'code';
 }

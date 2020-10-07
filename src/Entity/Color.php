@@ -24,72 +24,35 @@ class Color
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank(message="not_blank")
      */
-    private $name;
+    public string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank(message="not_blank")
      */
-    private $code;
+    public string $code;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Fabric", mappedBy="colors")
      */
-    private $fabrics;
+    public Collection $fabrics;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $deletedAt;
+    public ?\DateTimeInterface $deletedAt = null;
 
     public function __construct()
     {
         $this->fabrics = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): self
-    {
-        $this->code = $code;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Fabric[]
-     */
-    public function getFabrics(): Collection
-    {
-        return $this->fabrics;
     }
 
     public function addFabric(Fabric $fabric): self
@@ -108,18 +71,6 @@ class Color
             $this->fabrics->removeElement($fabric);
             $fabric->removeColor($this);
         }
-
-        return $this;
-    }
-
-    public function getDeletedAt(): ?\DateTimeInterface
-    {
-        return $this->deletedAt;
-    }
-
-    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
-    {
-        $this->deletedAt = $deletedAt;
 
         return $this;
     }

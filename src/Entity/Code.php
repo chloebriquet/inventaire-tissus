@@ -21,46 +21,17 @@ class Code
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank(message="not_blank")
      */
-    private $name;
+    public string $name;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $used_at;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getUsedAt(): ?\DateTimeInterface
-    {
-        return $this->used_at;
-    }
-
-    public function setUsedAt(?\DateTimeInterface $used_at): self
-    {
-        $this->used_at = $used_at;
-
-        return $this;
-    }
+    public ?\DateTimeInterface $used_at = null;
 }

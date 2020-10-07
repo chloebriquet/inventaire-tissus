@@ -11,14 +11,14 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class IsCodeAvailableValidator extends ConstraintValidator
 {
-    protected $registry;
+    protected ManagerRegistry $registry;
 
     public function __construct(ManagerRegistry $registry)
     {
         $this->registry = $registry;
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof IsCodeAvailable) {
             throw new UnexpectedTypeException($constraint, IsCodeAvailable::class);

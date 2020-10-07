@@ -9,7 +9,7 @@ use Twig\TwigFunction;
 
 class UuidExtension extends AbstractExtension
 {
-    private $encoder;
+    protected UuidEncoder $encoder;
 
     public function __construct(UuidEncoder $encoder)
     {

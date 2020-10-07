@@ -24,75 +24,60 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface
 {
     /**
-     * @var UuidInterface
-     *
      * @ORM\Id
      * @ORM\Column(type="uuid", unique=true)
      * @ORM\GeneratedValue(strategy="CUSTOM")
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
-    protected $uuid;
+    public ?UuidInterface $uuid = null;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=180, unique=true)
      *
      * @Assert\NotBlank(message="not_blank")
      */
-    private $username;
+    public string $username;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=180, unique=true)
      *
      * @Assert\Email(message="email")
      * @Assert\NotBlank(message="not_blank")
      */
-    private $email;
+    public string $email;
 
     /**
-     * @var string
      * @Assert\Email
      * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
      */
-    private $emailConfirmation;
+    public string $emailConfirmation;
 
     /**
-     * @var array
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    protected array $roles = [];
 
     /**
-     * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    public ?string $password = null;
 
     /**
-     * @var string
      * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
      * @Assert\Regex("/^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9!#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}$/", message="password.composition")
      */
-    private $plainPassword;
+    public ?string $plainPassword = null;
 
     /**
-     * @var string
      * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
      */
-    private $passwordConfirmation;
+    public ?string $passwordConfirmation = null;
 
     /**
-     * @var string
      * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
      * @IsCodeAvailable
      */
-    private $code;
-
-    public function getUuid(): UuidInterface
-    {
-        return $this->uuid;
-    }
+    public ?string $code = null;
 
     /**
      * A visual identifier that represents this user.
@@ -102,26 +87,6 @@ class User implements UserInterface
     public function getUsername(): string
     {
         return (string)$this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    public function setEmail(string $email): void
-    {
-        $this->email = $email;
     }
 
     /**
@@ -136,26 +101,12 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
     /**
      * @see UserInterface
      */
     public function getPassword(): string
     {
         return (string)$this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
     }
 
     /**
@@ -172,53 +123,5 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         $this->plainPassword = null;
-    }
-
-    public function getPlainPassword(): ?string
-    {
-        return $this->plainPassword;
-    }
-
-    public function setPlainPassword(string $plainPassword): self
-    {
-        $this->plainPassword = $plainPassword;
-
-        return $this;
-    }
-
-    public function getPasswordConfirmation(): ?string
-    {
-        return $this->passwordConfirmation;
-    }
-
-    public function setPasswordConfirmation(string $passwordConfirmation): self
-    {
-        $this->passwordConfirmation = $passwordConfirmation;
-
-        return $this;
-    }
-
-    public function getEmailConfirmation(): ?string
-    {
-        return $this->emailConfirmation;
-    }
-
-    public function setEmailConfirmation(string $emailConfirmation): self
-    {
-        $this->emailConfirmation = $emailConfirmation;
-
-        return $this;
-    }
-
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    public function setCode(string $code): self
-    {
-        $this->code = $code;
-
-        return $this;
     }
 }

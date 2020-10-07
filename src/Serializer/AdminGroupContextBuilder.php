@@ -8,8 +8,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AdminGroupContextBuilder implements SerializerContextBuilderInterface
 {
-    private $decorated;
-    private $authorizationChecker;
+    protected SerializerContextBuilderInterface $decorated;
+    protected AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(SerializerContextBuilderInterface $decorated, AuthorizationCheckerInterface $authorizationChecker)
     {

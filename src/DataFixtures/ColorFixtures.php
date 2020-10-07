@@ -8,19 +8,19 @@ use Doctrine\Persistence\ObjectManager;
 
 class ColorFixtures extends Fixture
 {
-    private $webcolors;
+    protected array $webcolors;
 
     public function __construct(array $webcolors)
     {
         $this->webcolors = $webcolors;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         for ($i = 0; $i < 20; ++$i) {
             $color = new Color();
-            $color->setCode($this->webcolors[$i]);
-            $color->setName($this->webcolors[$i]);
+            $color->code = $this->webcolors[$i];
+            $color->name = $this->webcolors[$i];
 
             $manager->persist($color);
         }

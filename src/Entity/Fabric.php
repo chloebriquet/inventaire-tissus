@@ -22,192 +22,83 @@ class Fabric
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    public ?int $id = null;
 
     /**
      * @ORM\Column(type="integer")
      *
      * @Assert\NotBlank(message="not_blank")
      */
-    private $box;
+    public int $box;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank(message="not_blank")
      */
-    private $material;
+    public string $material;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank(message="not_blank")
      */
-    private $pattern;
+    public string $pattern;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank(message="not_blank")
      */
-    private $state;
+    public string $state;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
      * @Assert\NotBlank(message="not_blank")
      */
-    private $thickness;
+    public string $thickness;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $width;
+    public ?int $width = null;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $length;
+    public ?int $length = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $comment;
+    public ?string $comment = null;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Color", inversedBy="fabrics", cascade={"persist"})
      *
      * @Assert\Count(min="1")
      */
-    private $colors;
+    public Collection $colors;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    public ?\DateTimeInterface $createdAt = null;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $updatedAt;
+    public ?\DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private $deletedAt;
+    public ?\DateTimeInterface $deletedAt = null;
 
     public function __construct()
     {
         $this->colors = new ArrayCollection();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getBox(): ?int
-    {
-        return $this->box;
-    }
-
-    public function setBox(int $box): self
-    {
-        $this->box = $box;
-
-        return $this;
-    }
-
-    public function getMaterial(): ?string
-    {
-        return $this->material;
-    }
-
-    public function setMaterial(string $material): self
-    {
-        $this->material = $material;
-
-        return $this;
-    }
-
-    public function getPattern(): ?string
-    {
-        return $this->pattern;
-    }
-
-    public function setPattern(string $pattern): self
-    {
-        $this->pattern = $pattern;
-
-        return $this;
-    }
-
-    public function getState(): ?string
-    {
-        return $this->state;
-    }
-
-    public function setState(string $state): self
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    public function getThickness(): ?string
-    {
-        return $this->thickness;
-    }
-
-    public function setThickness(string $thickness): self
-    {
-        $this->thickness = $thickness;
-
-        return $this;
-    }
-
-    public function getWidth(): ?int
-    {
-        return $this->width;
-    }
-
-    public function setWidth(?int $width): self
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    public function getLength(): ?int
-    {
-        return $this->length;
-    }
-
-    public function setLength(?int $length): self
-    {
-        $this->length = $length;
-
-        return $this;
-    }
-
-    public function getComment(): ?string
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?string $comment): self
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Color[]
-     */
-    public function getColors(): Collection
-    {
-        return $this->colors;
     }
 
     public function addColor(Color $color): self
@@ -228,53 +119,17 @@ class Fabric
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getDeletedAt(): ?\DateTimeInterface
-    {
-        return $this->deletedAt;
-    }
-
-    public function setDeletedAt(?\DateTimeInterface $deletedAt): self
-    {
-        $this->deletedAt = $deletedAt;
-
-        return $this;
-    }
-
     /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
      */
     public function updateTimestamps(): void
     {
-        $now = new DateTime();
+        $now = new \DateTimeImmutable();
 
-        $this->setUpdatedAt($now);
-        if (null === $this->getCreatedAt()) {
-            $this->setCreatedAt($now);
+        $this->updatedAt = $now;
+        if (null === $this->createdAt) {
+            $this->updatedAt = $now;
         }
     }
 }
