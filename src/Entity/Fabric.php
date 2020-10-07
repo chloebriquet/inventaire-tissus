@@ -27,35 +27,35 @@ class Fabric
     /**
      * @ORM\Column(type="integer")
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="not_blank")
      */
     private $box;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="not_blank")
      */
     private $material;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="not_blank")
      */
     private $pattern;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="not_blank")
      */
     private $state;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="not_blank")
      */
     private $thickness;
 

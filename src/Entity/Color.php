@@ -12,8 +12,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ColorRepository")
  *
- * @UniqueEntity("name")
- * @UniqueEntity("code")
+ * @UniqueEntity("name", message="unique_entity")
+ * @UniqueEntity("code", message="unique_entity")
  *
  * @ApiResource
  */
@@ -29,14 +29,14 @@ class Color
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="not_blank")
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="not_blank")
      */
     private $code;
 

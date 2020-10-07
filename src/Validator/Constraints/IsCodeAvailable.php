@@ -9,5 +9,5 @@ use Symfony\Component\Validator\Constraint;
  */
 class IsCodeAvailable extends Constraint
 {
-    public $message = 'Le code "{{ value }}" n\'est pas valide.';
+    public $message = 'code';
 }

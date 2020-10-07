@@ -5,11 +5,12 @@ namespace App\Entity;
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CodeRepository")
  *
- * @UniqueEntity("name")
+ * @UniqueEntity("name", message="unique_entity")
  *
  * @ApiResource
  */
@@ -24,6 +25,8 @@ class Code
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank(message="not_blank")
      */
     private $name;
 

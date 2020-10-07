@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraint;
 class HasSameValue extends Constraint
 {
     public $type = '';
-    public $message = '{{ field }} ne correspond pas.';
+    public $message = 'has_same_value';
     public $fields = [];
     public $errorPath = '';
 

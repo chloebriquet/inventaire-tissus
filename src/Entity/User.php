@@ -14,8 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  *
- * @UniqueEntity("username")
- * @UniqueEntity("email")
+ * @UniqueEntity("username", message="unique_entity")
+ * @UniqueEntity("email", message="unique_entity")
  * @HasSameValue(fields={"plainPassword", "passwordConfirmation"}, type="Le mot de passe", errorPath="passwordConfirmation", groups={"user:create"})
  * @HasSameValue(fields={"email", "emailConfirmation"}, type="L'email", errorPath="emailConfirmation", groups={"user:create"})
  *
@@ -37,7 +37,7 @@ class User implements UserInterface
      * @var string
      * @ORM\Column(type="string", length=180, unique=true)
      *
-     * @Assert\NotBlank
+     * @Assert\NotBlank(message="not_blank")
      */
     private $username;
 
@@ -45,15 +45,15 @@ class User implements UserInterface
      * @var string
      * @ORM\Column(type="string", length=180, unique=true)
      *
-     * @Assert\Email
-     * @Assert\NotBlank
+     * @Assert\Email(message="email")
+     * @Assert\NotBlank(message="not_blank")
      */
     private $email;
 
     /**
      * @var string
      * @Assert\Email
-     * @Assert\NotBlank(groups={"user:create"})
+     * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
      */
     private $emailConfirmation;
 
@@ -71,20 +71,20 @@ class User implements UserInterface
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"user:create"})
-     * @Assert\Regex("/^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9!#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}$/")
+     * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
+     * @Assert\Regex("/^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9!#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}$/", message="password.composition")
      */
     private $plainPassword;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"user:create"})
+     * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
      */
     private $passwordConfirmation;
 
     /**
      * @var string
-     * @Assert\NotBlank(groups={"user:create"})
+     * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
      * @IsCodeAvailable
      */
     private $code;

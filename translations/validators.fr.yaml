@@ -1,0 +1,6 @@
+code: "Le code \"{{ value }}\" n'est pas valide."
+email: 'Veuillez saisir une adresse électronique valide.'
+has_same_value: '{{ field }} ne correspond pas.'
+not_blank: 'Cette valeur ne doit pas être vide.'
+password.composition: "Le mot de passe doit contenir au moins 8 caractères dont une lettre, un chiffre et un caractère spécial (à l'exception de \" et ')."
+unique_entity: 'Cette valeur est déjà utilisée.'
