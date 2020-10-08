@@ -10,36 +10,36 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue';
-    import Navbar from './Navbar.vue';
+import {defineComponent} from '@vue/composition-api';
+import Navbar from './Navbar.vue';
 
-    export default Vue.extend({
-        name: 'App',
-        components: {
-            Navbar
-        }
-    });
+export default defineComponent({
+    name: 'App',
+    components: {
+        Navbar
+    }
+});
 </script>
 
 <style lang="scss" scoped>
-    #app {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-    }
+#app {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
 
-    .columns {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
-        align-items: center;
-        margin: 2rem 0;
-    }
+.columns {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    align-items: center;
+    margin: 2rem 0;
+}
 
-    .main.column {
-        background-color: #fff;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-    }
+.main.column {
+    background-color: #fff;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
 </style>

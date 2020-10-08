@@ -53,40 +53,40 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue';
-    import User from '../models/user';
-    import { API } from '../http-common';
+import User from '../models/user';
+import {API} from '../http-common';
+import {defineComponent} from '@vue/composition-api';
 
-    export default Vue.extend({
-        name: 'Navbar',
-        props: {
-            user: {
-                type: Object as () => User,
-                required: true
-            },
-            isLoaded: {
-                type: Boolean,
-                default: false
-            }
+export default defineComponent({
+    name: 'Navbar',
+    props: {
+        user: {
+            type: Object as () => User,
+            required: true
         },
-        methods: {
-            logout(): void {
-                API.post(window.location.origin + '/api/logout').finally(() => {
-                    this.$root.user = new User();
-                    this.$buefy.toast.open({
-                        duration: 3000,
-                        message: `Tu as bien été déconnecté·e !`,
-                        position: 'is-top',
-                        type: 'is-info'
-                    });
-                });
-            }
+        isLoaded: {
+            type: Boolean,
+            default: false
         }
-    });
+    },
+    methods: {
+        logout(): void {
+            API.post(window.location.origin + '/api/logout').finally(() => {
+                this.$root.user = new User();
+                this.$buefy.toast.open({
+                    duration: 3000,
+                    message: `Tu as bien été déconnecté·e !`,
+                    position: 'is-top',
+                    type: 'is-info'
+                });
+            });
+        }
+    }
+});
 </script>
 
 <style lang="scss" scoped>
-    .navbar-brand span.icon + div {
-        margin-left: 1rem;
-    }
+.navbar-brand span.icon + div {
+    margin-left: 1rem;
+}
 </style>

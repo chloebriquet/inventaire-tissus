@@ -1,11 +1,11 @@
 <template> </template>
 
-<script>
-    import Vue from 'vue';
+<script lang="ts">
+import {defineComponent} from '@vue/composition-api';
 
-    export default Vue.extend({
-        name: 'Home'
-    });
+export default defineComponent({
+    name: 'Home'
+});
 </script>
 
 <style scoped></style>

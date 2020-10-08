@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue';
+import {defineComponent} from '@vue/composition-api';
 
-    export default Vue.extend({
-        name: "FabricForm"
-    })
+export default defineComponent({
+    name: "FabricForm"
+})
 </script>
 
 <style lang="scss" scoped>

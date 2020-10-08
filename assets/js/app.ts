@@ -6,6 +6,8 @@ import '@mdi/font/css/materialdesignicons.min.css';
 import '../scss/bulmaswatch.scss';
 import '../scss/style.scss';
 
+import './utils/compositionPlugin';
+
 import App from './components/App.vue';
 import User from './models/user';
 import router from './router';

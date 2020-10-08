@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue';
+import {defineComponent} from '@vue/composition-api';
 
-    export default Vue.extend({
-        name: "ColorList"
-    })
+export default defineComponent({
+    name: "ColorList"
+})
 </script>
 
 <style lang="scss" scoped>

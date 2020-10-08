@@ -4,7 +4,7 @@
             <div class="column is-half has-text-centered">
                 Déjà un compte ?
                 <router-link :to="{ name: 'login' }"
-                    >Connecte-toi !</router-link
+                >Connecte-toi !</router-link
                 >
             </div>
         </div>
@@ -82,91 +82,91 @@
 </template>
 
 <script lang="ts">
-    import Vue from 'vue';
-    import { API } from '../http-common';
-    import Violation from '../types/violation';
-    import FormField from '../types/formField';
+import {API} from '../http-common';
+import Violation from '../types/violation';
+import FormField from '../types/formField';
+import {defineComponent} from '@vue/composition-api';
 
-    export default Vue.extend({
-        name: 'Register',
-        data() {
-            return {
-                form: {
-                    username: new FormField(),
-                    email: new FormField(),
-                    emailConfirmation: new FormField(),
-                    password: new FormField(),
-                    passwordConfirmation: new FormField(),
-                    code: new FormField(),
-                    error: '' as string
-                } as { [key: string]: any }
+export default defineComponent({
+    name: 'Register',
+    data() {
+        return {
+            form: {
+                username: new FormField(),
+                email: new FormField(),
+                emailConfirmation: new FormField(),
+                password: new FormField(),
+                passwordConfirmation: new FormField(),
+                code: new FormField(),
+                error: '' as string
+            } as { [key: string]: any }
+        };
+    },
+    methods: {
+        register(event: Event) {
+            event.preventDefault();
+
+            this.resetErrors();
+
+            const formData: { [key: string]: string } = {
+                username: this.form.username.field,
+                email: this.form.email.field,
+                emailConfirmation: this.form.emailConfirmation.field,
+                password: this.form.password.field,
+                passwordConfirmation: this.form.passwordConfirmation.field,
+                code: this.form.code.field
             };
-        },
-        methods: {
-            register(event: Event) {
-                event.preventDefault();
 
-                this.resetErrors();
-
-                const formData: { [key: string]: string } = {
-                    username: this.form.username.field,
-                    email: this.form.email.field,
-                    emailConfirmation: this.form.emailConfirmation.field,
-                    password: this.form.password.field,
-                    passwordConfirmation: this.form.passwordConfirmation.field,
-                    code: this.form.code.field
-                };
-
-                API.post('/users', formData)
-                    .then(response => {
-                        this.resetForm();
-                        this.$buefy.toast.open({
-                            duration: 3000,
-                            message: `L'enregistrement a bien été effectué.`,
-                            position: 'is-top',
-                            type: 'is-info'
-                        });
-                        this.$router.push({ name: 'login' });
-                    })
-                    .catch(error => {
-                        const status = error.response.status;
-
-                        if (400 === status) {
-                            const data = error.response.data;
-                            data.violations.forEach((violation: Violation) => {
-                                if (violation.propertyPath in this.form) {
-                                    this.form[violation.propertyPath].error +=
-                                        violation.message + ' ';
-                                }
-                            });
-                        } else {
-                            this.$buefy.notification.open({
-                                duration: 5000,
-                                message: `Un problème est survenu lors de l'enregistrement. Merci de t'adresser à l'administratrice du site (à savoir Chloé).`,
-                                position: 'is-bottom',
-                                type: 'is-danger'
-                            });
-                        }
+            API.post('/users', formData)
+                .then(response => {
+                    this.resetForm();
+                    this.$buefy.toast.open({
+                        duration: 3000,
+                        message: `L'enregistrement a bien été effectué.`,
+                        position: 'is-top',
+                        type: 'is-info'
                     });
-            },
-            resetErrors(): void {
-                this.form.username.resetError();
-                this.form.email.resetError();
-                this.form.emailConfirmation.resetError();
-                this.form.password.resetError();
-                this.form.passwordConfirmation.resetError();
-                this.form.code.resetError();
-            },
-            resetForm(): void {
-                this.form.username.field = new FormField();
-                this.form.email.field = new FormField();
-                this.form.emailConfirmation.field = new FormField();
-                this.form.password.field = new FormField();
-                this.form.passwordConfirmation.field = new FormField();
-                this.form.code.field = new FormField();
-            }
+                    this.$router.push({ name: 'login' });
+                })
+                .catch(error => {
+                    const status = error.response.status;
+
+                    if (400 === status) {
+                        const data = error.response.data;
+                        data.violations.forEach((violation: Violation) => {
+                            if (violation.propertyPath in this.form) {
+                                this.form[violation.propertyPath].error +=
+                                    violation.message + ' ';
+                            }
+                        });
+                    } else {
+                        this.$buefy.notification.open({
+                            duration: 5000,
+                            message: `Un problème est survenu lors de l'enregistrement. Merci de t'adresser à l'administratrice du site (à savoir Chloé).`,
+                            position: 'is-bottom',
+                            type: 'is-danger'
+                        });
+                    }
+                });
+        },
+        resetErrors(): void {
+            this.form.username.resetError();
+            this.form.email.resetError();
+            this.form.emailConfirmation.resetError();
+            this.form.password.resetError();
+            this.form.passwordConfirmation.resetError();
+            this.form.code.resetError();
+        },
+        resetForm(): void {
+            this.form.username.field = new FormField();
+            this.form.email.field = new FormField();
+            this.form.emailConfirmation.field = new FormField();
+            this.form.password.field = new FormField();
+            this.form.passwordConfirmation.field = new FormField();
+            this.form.code.field = new FormField();
         }
-    });
+    }
+});
 </script>
 
 <style lang="scss" scoped></style>
