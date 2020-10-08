@@ -2,7 +2,7 @@
     <div id="app">
         <Navbar :user="$root.user" :is-loaded="$root.isLoaded" />
         <div class="columns is-centered">
-            <div class="main column is-two-thirds">
+            <div class="main column is-8">
                 <router-view></router-view>
             </div>
         </div>
@@ -29,7 +29,6 @@ export default defineComponent({
 }
 
 .columns {
-    display: flex;
     flex-direction: column;
     flex-grow: 1;
     align-items: center;
@@ -39,7 +38,5 @@ export default defineComponent({
 .main.column {
     background-color: #fff;
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
 }
 </style>
