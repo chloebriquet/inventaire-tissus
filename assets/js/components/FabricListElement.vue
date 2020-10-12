@@ -15,6 +15,11 @@
                 {{ fabric.comment }}
             </div>
         </div>
+        <footer class="card-footer">
+            <router-link :to="{ name: 'fabric_show', params: { fabricId: fabric.id }}" class="card-footer-item"><b-icon icon="eye" /></router-link>
+            <router-link :to="{ name: 'fabric_edit', params: { fabricId: fabric.id }}" class="card-footer-item"><b-icon icon="lead-pencil" /></router-link>
+            <a @click="deleteFabric" class="card-footer-item has-text-danger"><b-icon icon="delete-outline" /></a>
+        </footer>
     </div>
 </template>
 
@@ -27,10 +32,19 @@ export default defineComponent({
     name: 'FabricListElement',
     props: {
         fabric: Object as PropType<Fabric>,
+    },
+    methods: {
+        deleteFabric() {
+
+        }
     }
 })
 </script>
 
 <style lang="scss" scoped>
-
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 </style>

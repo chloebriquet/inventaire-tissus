@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Navbar :user="$root.user" :is-loaded="$root.isLoaded" />
+        <navbar :user="$root.user" :is-loaded="$root.isLoaded" />
         <div class="columns is-centered">
             <div class="main column is-8">
                 <router-view></router-view>
