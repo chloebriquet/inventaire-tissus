@@ -22,7 +22,7 @@
             <router-link :to="{ name: 'fabric_edit', params: { fabricId: fabric.id }}" class="card-footer-item">
                 <span class="is-sr-only">Modifier le tissu</span><b-icon icon="lead-pencil" />
             </router-link>
-            <a @click="deleteFabric" class="card-footer-item has-text-danger">
+            <a @click="$emit('fabric-delete')" class="card-footer-item has-text-danger">
                 <span class="is-sr-only">Supprimer le tissu</span><b-icon icon="delete-outline" />
             </a>
         </footer>
@@ -32,7 +32,6 @@
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
 import {PropType} from '@vue/composition-api';
-import {API} from '../http-common';
 import Fabric from '../models/fabric';
 
 export default defineComponent({
@@ -40,16 +39,6 @@ export default defineComponent({
     props: {
         fabric: Object as PropType<Fabric>,
     },
-    methods: {
-        deleteFabric() {
-            const id = this.fabric?.id;
-
-            if (typeof id !== 'undefined') {
-                API.delete(`/fabrics/${id}`);
-                this.$emit('fabric-delete');
-            }
-        }
-    }
 })
 </script>
 

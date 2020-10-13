@@ -1,16 +1,16 @@
 <template>
-    <b-modal v-model="displayModal">
-        <div class="card">
-            <div class="card-content">
+    <b-modal :active.sync="displayModal" @close="$emit('close')" has-modal-card aria-role="alertdialog" aria-modal>
+        <div class="modal-card">
+            <div class="modal-card-body">
                 <div class="content has-text-centered">
                     {{ modalMessage }}
                 </div>
             </div>
-            <footer class="card-footer">
+            <footer class="modal-card-foot">
                 <a @click="$emit('confirm')" :class="`card-footer-item ${confirmClass}`">
                     {{ confirmMessage }}
                 </a>
-                <a @click="" :class="`card-footer-item ${cancelClass}`">
+                <a @click="$emit('close');$emit('cancel');" :class="`card-footer-item ${cancelClass}`">
                     {{ cancelMessage }}
                 </a>
             </footer>
@@ -47,9 +47,6 @@ export default {
             default: 'has-text-link'
         }
     },
-    methods: {
-
-    }
 }
 </script>
 
