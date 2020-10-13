@@ -13,10 +13,10 @@ class DeletedListener
 
         foreach ($uow->getScheduledEntityDeletions() as $entity) {
             if (
-                method_exists($entity, 'getDeletedAt')
-                && !$entity->getDeletedAt() instanceof \Datetime
+                property_exists($entity, 'deletedAt')
+                && !$entity->deletedAt instanceof \Datetime
             ) {
-                $entity->setDeletedAt(new \DateTime());
+                $entity->deletedAt = new \DateTime();
 
                 try {
                     $em->persist($entity);

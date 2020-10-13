@@ -1,7 +1,7 @@
 <template>
     <div class="fabric-list columns is-mobile">
         <div v-for="fabric in fabrics" :key="fabric.id" class="column is-12-mobile is-6-tablet is-4-desktop">
-            <fabric-list-element :fabric="fabric" />
+            <fabric-list-element :fabric="fabric" @fabric-delete="deleteFabric(fabric)"/>
         </div>
     </div>
 </template>
@@ -31,6 +31,15 @@ export default defineComponent({
                 .then(response => {
                     this.fabrics = response.data['hydra:member'];
                 });
+        },
+        deleteFabric(fabric: Fabric) {
+            const id = this.fabrics.findIndex(value => {
+                return fabric.id === value.id;
+            });
+
+            if (-1 !== id) {
+                this.fabrics.splice(id, 1);
+            }
         }
     }
 })

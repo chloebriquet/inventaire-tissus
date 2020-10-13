@@ -16,17 +16,24 @@
             </div>
         </div>
         <footer class="card-footer">
-            <router-link :to="{ name: 'fabric_show', params: { fabricId: fabric.id }}" class="card-footer-item"><b-icon icon="eye" /></router-link>
-            <router-link :to="{ name: 'fabric_edit', params: { fabricId: fabric.id }}" class="card-footer-item"><b-icon icon="lead-pencil" /></router-link>
-            <a @click="deleteFabric" class="card-footer-item has-text-danger"><b-icon icon="delete-outline" /></a>
+            <router-link :to="{ name: 'fabric_show', params: { fabricId: fabric.id }}" class="card-footer-item">
+                <span class="is-sr-only">Voir le tissu</span><b-icon icon="eye" />
+            </router-link>
+            <router-link :to="{ name: 'fabric_edit', params: { fabricId: fabric.id }}" class="card-footer-item">
+                <span class="is-sr-only">Modifier le tissu</span><b-icon icon="lead-pencil" />
+            </router-link>
+            <a @click="deleteFabric" class="card-footer-item has-text-danger">
+                <span class="is-sr-only">Supprimer le tissu</span><b-icon icon="delete-outline" />
+            </a>
         </footer>
     </div>
 </template>
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
-import Fabric from '../models/fabric';
 import {PropType} from '@vue/composition-api';
+import {API} from '../http-common';
+import Fabric from '../models/fabric';
 
 export default defineComponent({
     name: 'FabricListElement',
@@ -35,7 +42,12 @@ export default defineComponent({
     },
     methods: {
         deleteFabric() {
+            const id = this.fabric?.id;
 
+            if (typeof id !== 'undefined') {
+                API.delete(`/fabrics/${id}`);
+                this.$emit('fabric-delete');
+            }
         }
     }
 })
