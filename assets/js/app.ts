@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Buefy from 'buefy';
+import i18n from './i18n';
 
 import '@mdi/font/css/materialdesignicons.min.css';
-import '../scss/bulmaswatch.scss';
 import '../scss/style.scss';
 
 import './utils/compositionPlugin';
@@ -28,6 +28,7 @@ new Vue({
     template: '<App/>',
     components: { App },
     router,
+    i18n,
     data() {
         return {
             user: {} as User,

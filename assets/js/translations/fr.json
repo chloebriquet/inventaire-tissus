@@ -1,0 +1,18 @@
+{
+  "fabric": {
+    "delete": {
+      "confirm": {
+        "message": "Êtes-vous sûr·e de supprimer le tissu \"{name}\" ?",
+        "no": "Non, annuler",
+        "yes": "Oui, supprimer"
+      }
+    }
+  },
+  "modal": {
+    "default": {
+      "cancel": "Annuler",
+      "confirm": "Confirmer",
+      "message": "Êtes-vous sûr·e d'effectuer cette action ?"
+    }
+  }
+}

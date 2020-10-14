@@ -9,6 +9,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "removeComments": true,
+    "resolveJsonModule": true,
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
