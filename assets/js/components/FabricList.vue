@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
+import {defineComponent, PropType} from '@vue/composition-api';
 import {API} from '../http-common';
 import Fabric from '../models/fabric';
 import FabricListElement from './FabricListElement.vue';
@@ -36,23 +36,19 @@ export default defineComponent({
         ConfirmModal,
         FabricListElement,
     },
+    props: {
+        fabrics: {
+            type: Array as PropType<Fabric[]>,
+            default: [],
+        },
+    },
     data() {
         return {
-            fabrics: [] as Fabric[],
             displayModal: false,
             fabricToDelete: {} as Fabric,
-        }
-    },
-    mounted() {
-        this.getFabrics();
+        };
     },
     methods: {
-        getFabrics: function (): void {
-            API.get('fabrics')
-                .then(response => {
-                    this.fabrics = response.data['hydra:member'];
-                });
-        },
         confirmDelete(fabric: Fabric): void {
             this.fabricToDelete = fabric;
             this.displayModal = true;
@@ -73,7 +69,7 @@ export default defineComponent({
             });
 
             if (-1 !== arrayId) {
-                this.fabrics.splice(arrayId, 1);
+                this.$emit('fabric-delete', arrayId);
             }
 
             this.closeModal(modal);
