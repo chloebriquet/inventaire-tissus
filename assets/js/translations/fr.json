@@ -6,6 +6,9 @@
     }
   },
   "fabric": {
+    "add": {
+      "action": "Créer"
+    },
     "delete": {
       "action": "Supprimer le tissu",
       "confirm": {
@@ -15,7 +18,18 @@
       }
     },
     "edit": {
-      "action": "Modifier le tissu"
+      "action": "Modifier",
+      "link": "Modifier le tissu"
+    },
+    "field": {
+      "box": "Carton",
+      "material": "Matière",
+      "pattern": "Motif",
+      "state": "État",
+      "thickness": "Épaisseur",
+      "width": "Largeur",
+      "length": "Longueur",
+      "comment": "Commentaire"
     },
     "see": {
       "action": "Voir le tissu"

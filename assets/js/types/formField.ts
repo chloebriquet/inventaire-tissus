@@ -1,8 +1,8 @@
 export default class FormField {
-    field: string;
+    field: any;
     error: string;
 
-    constructor(field: string = '', error: string = '') {
+    constructor(field: any = '', error: string = '') {
         this.field = field;
         this.error = error;
     }
