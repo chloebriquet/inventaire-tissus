@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <section class="section">
         <div class="fabric-list columns is-mobile">
-            <div v-for="fabric in fabrics" :key="fabric.id" class="column is-12-mobile is-6-tablet is-4-desktop">
+            <div v-for="fabric in fabrics" :key="fabric.id" class="column is-12-mobile is-6-tablet is-4-widescreen">
                 <fabric-list-element :fabric="fabric" @fabric-delete="confirmDelete(fabric)" />
             </div>
         </div>
@@ -20,7 +20,7 @@
                 />
             </template>
         </b-modal>
-    </div>
+    </section>
 </template>
 
 <script lang="ts">

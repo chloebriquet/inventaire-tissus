@@ -2,7 +2,7 @@
     <div id="app">
         <navbar :user="$root.user" :is-loaded="$root.isLoaded" />
         <div class="columns is-centered">
-            <div class="main column is-8">
+            <div class="main column is-10-tablet is-8-desktop">
                 <router-view></router-view>
             </div>
         </div>

@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="columns is-centered">
-            <form class="column is-half" @submit="register">
+            <form class="column is-half" @submit="signUp">
                 <b-field
                     :label="$t('user.username')"
                     :message="form.username.error"
@@ -103,7 +103,7 @@ export default defineComponent({
         };
     },
     methods: {
-        register(event: Event) {
+        signUp(event: Event) {
             event.preventDefault();
 
             this.resetErrors();

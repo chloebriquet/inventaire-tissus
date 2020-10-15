@@ -20,7 +20,7 @@
             </div>
         </div>
         <div class="columns is-centered">
-            <form class="column is-half" @submit="login">
+            <form class="column is-half" @submit="signIn">
                 <b-field :label="$t('user.username')">
                     <b-input v-model="form.username" required></b-input>
                 </b-field>
@@ -67,7 +67,7 @@ export default defineComponent({
         };
     },
     methods: {
-        login(event: Event) {
+        signIn(event: Event) {
             event.preventDefault();
 
             this.resetError();
