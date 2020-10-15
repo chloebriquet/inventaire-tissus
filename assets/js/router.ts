@@ -14,7 +14,7 @@ import NotFound from './components/NotFound.vue';
 const routes = [
     { path: '/fabrics', name: 'fabric_list', component: FabricList },
     { path: '/fabrics/add', name: 'fabric_add', component: FabricForm },
-    { path: '/fabrics/:fabricId', name: 'fabric_show', component: FabricElement },
+    { path: '/fabrics/:fabricId', name: 'fabric_see', component: FabricElement },
     { path: '/fabrics/:fabricId/edit', name: 'fabric_edit', component: FabricForm },
     { path: '/colors', name: 'color_list', component: ColorList },
     { path: '/colors/add', name: 'color_add', component: ColorForm },

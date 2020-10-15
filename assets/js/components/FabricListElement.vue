@@ -16,14 +16,14 @@
             </div>
         </div>
         <footer class="card-footer">
-            <router-link :to="{ name: 'fabric_show', params: { fabricId: fabric.id }}" class="card-footer-item">
-                <span class="is-sr-only">Voir le tissu</span><b-icon icon="eye" />
+            <router-link :to="{ name: 'fabric_see', params: { fabricId: fabric.id }}" class="card-footer-item">
+                <span class="is-sr-only">{{ $t('fabric.see.action') }}</span><b-icon icon="eye" />
             </router-link>
             <router-link :to="{ name: 'fabric_edit', params: { fabricId: fabric.id }}" class="card-footer-item">
-                <span class="is-sr-only">Modifier le tissu</span><b-icon icon="lead-pencil" />
+                <span class="is-sr-only">{{ $t('fabric.edit.action') }}</span><b-icon icon="lead-pencil" />
             </router-link>
             <a @click="$emit('fabric-delete')" class="card-footer-item has-text-danger">
-                <span class="is-sr-only">Supprimer le tissu</span><b-icon icon="delete-outline" />
+                <span class="is-sr-only">{{ $t('fabric.delete.action') }}</span><b-icon icon="delete-outline" />
             </a>
         </footer>
     </div>

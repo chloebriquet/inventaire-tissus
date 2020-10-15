@@ -1,11 +1,24 @@
 {
+  "code": "Code",
+  "common": {
+    "notification": {
+      "close": "Fermer la notification"
+    }
+  },
   "fabric": {
     "delete": {
+      "action": "Supprimer le tissu",
       "confirm": {
         "message": "Êtes-vous sûr·e de supprimer le tissu \"{name}\" ?",
         "no": "Non, annuler",
         "yes": "Oui, supprimer"
       }
+    },
+    "edit": {
+      "action": "Modifier le tissu"
+    },
+    "see": {
+      "action": "Voir le tissu"
     }
   },
   "modal": {
@@ -13,6 +26,64 @@
       "cancel": "Annuler",
       "confirm": "Confirmer",
       "message": "Êtes-vous sûr·e d'effectuer cette action ?"
+    }
+  },
+  "nav": {
+    "color": {
+      "add": "Ajouter une couleur",
+      "list": "Liste des couleurs"
+    },
+    "fabric": {
+      "add": "Ajouter un tissu",
+      "list": "Liste des tissus"
+    }
+  },
+  "sign_in": {
+    "action": "Se connecter",
+    "error": {
+      "fetched_user": "",
+      "invalid_credentials": "L'utilisateur et/ou le mot de passe sont incorrects."
+    },
+    "remember_me": "Se souvenir de moi",
+    "sign_up": {
+      "action": "Enregistre-toi !",
+      "question": "Pas encore de compte ?"
+    }
+  },
+  "sign_up": {
+    "action": "S'enregistrer",
+    "sign_in": {
+      "action": "Connecte-toi !",
+      "question": "Déjà un compte ?"
+    }
+  },
+  "user": {
+    "email": {
+      "confirm": "Confirmer l'email",
+      "main": "Email"
+    },
+    "password": {
+      "confirm": "Confirmer le mot de passe",
+      "main": "Mot de passe",
+      "validation": {
+        "message": "Le mot de passe doit contenir au moins 8 caractères dont une lettre, un chiffre et un caractère spécial.",
+        "regex": "^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!-/:-@[-`{-~])[a-zA-Z0-9!-/:-@[-`{-~]{8,}$"
+      }
+    },
+    "username": "Identifiant"
+  },
+  "site": {
+    "account": "Mon compte",
+    "name": "Yards and Co.",
+    "sign_in": {
+      "action": "Se connecter"
+    },
+    "sign_out": {
+      "action": "Se déconnecter",
+      "message": "Tu as bien été déconnecté·e !"
+    },
+    "sign_up": {
+      "action": "S'enregistrer"
     }
   }
 }

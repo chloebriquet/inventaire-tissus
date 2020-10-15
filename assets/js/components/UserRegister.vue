@@ -2,22 +2,22 @@
     <section class="section">
         <div class="columns is-centered">
             <div class="column is-half has-text-centered">
-                Déjà un compte ?
-                <router-link :to="{ name: 'login' }"
-                >Connecte-toi !</router-link
-                >
+                {{ $t('sign_up.sign_in.question') }}
+                <router-link :to="{ name: 'login' }">
+                    {{ $t('sign_up.sign_in.action') }}
+                </router-link>
             </div>
         </div>
         <div class="columns is-centered">
             <form class="column is-half" @submit="register">
                 <b-field
-                    label="Identifiant"
+                    :label="$t('user.username')"
                     :message="form.username.error"
                     :type="{ 'is-danger': form.username.error }"
                 >
                     <b-input v-model="form.username.field" required></b-input>
                 </b-field>
-                <b-field label="Email" :message="form.email.error" :type="{ 'is-danger': form.email.error }">
+                <b-field :label="$t('user.email.main')" :message="form.email.error" :type="{ 'is-danger': form.email.error }">
                     <b-input
                         type="email"
                         v-model="form.email.field"
@@ -25,7 +25,7 @@
                     ></b-input>
                 </b-field>
                 <b-field
-                    label="Confirmer l'email"
+                    :label="$t('user.email.confirm')"
                     :message="form.emailConfirmation.error"
                     :type="{ 'is-danger': form.emailConfirmation.error }"
                 >
@@ -38,21 +38,21 @@
                     ></b-input>
                 </b-field>
                 <b-field
-                    label="Mot de passe"
+                    :label="$t('user.password.main')"
                     :message="form.password.error"
                     :type="{ 'is-danger': form.password.error }"
                 >
                     <b-input
                         type="password"
                         v-model="form.password.field"
-                        pattern="^(?=.*?[a-zA-Z])(?=.*?[0-9])[a-zA-Z0-9!#\$%&'\(\)\*\+,-\.\/:;<=>\?@[\]\^_`\{\|}~]{8,}$"
-                        validation-message="Le mot de passe doit contenir au moins 8 caractères dont une lettre, un chiffre et un caractère spécial (à l'exception de &quot; et ')."
+                        :pattern="$t('user.password.validation.regex')"
+                        :validation-message="$t('user.password.validation.message')"
                         password-reveal
                         required
                     ></b-input>
                 </b-field>
                 <b-field
-                    label="Confirmer le mot de passe"
+                    :label="$t('user.password.confirm')"
                     :message="form.passwordConfirmation.error"
                     :type="{ 'is-danger': form.passwordConfirmation.error }"
                 >
@@ -65,7 +65,7 @@
                         @paste.native.prevent
                     ></b-input>
                 </b-field>
-                <b-field label="Code" :message="form.code.error" :type="{ 'is-danger': form.code.error }">
+                <b-field :label="$t('code')" :message="form.code.error" :type="{ 'is-danger': form.code.error }">
                     <b-input v-model="form.code.field" required></b-input>
                 </b-field>
                 <div class="buttons is-centered">
@@ -73,7 +73,7 @@
                         tag="input"
                         native-type="submit"
                         type="is-light"
-                        value="S'enregistrer"
+                        :value="$t('sign_up.action')"
                     />
                 </div>
             </form>

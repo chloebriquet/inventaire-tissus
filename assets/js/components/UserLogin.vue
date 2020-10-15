@@ -5,26 +5,26 @@
                 v-if="form.error"
                 class="column is-one-quarter"
                 type="is-warning"
-                aria-close-label="Close notification"
+                :aria-close-label="$t('common.notification.close')"
                 role="alert"
             >
-                L'utilisateur et/ou le mot de passe sont incorrects.
+                {{ $t('sign_in.error.invalid_credentials') }}
             </b-notification>
         </div>
         <div class="columns is-centered">
             <div class="column is-half has-text-centered">
-                Pas encore de compte ?
-                <router-link :to="{ name: 'register' }"
-                >Enregistre-toi !</router-link
-                >
+                {{ $t('sign_in.sign_up.question') }}
+                <router-link :to="{ name: 'register' }">
+                    {{ $t('sign_in.sign_up.action') }}
+                </router-link>
             </div>
         </div>
         <div class="columns is-centered">
             <form class="column is-half" @submit="login">
-                <b-field label="Identifiant">
+                <b-field :label="$t('user.username')">
                     <b-input v-model="form.username" required></b-input>
                 </b-field>
-                <b-field label="Mot de passe">
+                <b-field :label="$t('user.password.main')">
                     <b-input
                         type="password"
                         v-model="form.password"
@@ -34,7 +34,7 @@
                 </b-field>
                 <b-field>
                     <b-checkbox v-model="form.rememberMe" class="is-small">
-                        Se souvenir de moi
+                        {{ $t('sign_in.remember_me') }}
                     </b-checkbox>
                 </b-field>
                 <div class="buttons is-centered">
@@ -42,7 +42,7 @@
                         tag="input"
                         native-type="submit"
                         type="is-light"
-                        value="Se connecter"
+                        :value="$t('sign_in.action')"
                     />
                 </div>
             </form>
@@ -98,7 +98,7 @@ export default defineComponent({
                 .catch(() => {
                     this.$buefy.notification.open({
                         duration: 5000,
-                        message: `Un problème est survenu lors de la récupération de l'utilisateur. Merci de t'adresser à l'administratrice du site (à savoir Chloé).`,
+                        message: this.$t('sign_in.error.fetched_user').toString(),
                         position: 'is-bottom',
                         type: 'is-danger'
                     });

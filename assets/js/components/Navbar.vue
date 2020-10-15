@@ -3,31 +3,31 @@
         <template slot="brand">
             <b-navbar-item tag="router-link" :to="{ name: 'home' }">
                 <b-icon icon="scissors-cutting" />
-                <div>Yards and Co.</div>
+                <div>{{ $t('site.name') }}</div>
             </b-navbar-item>
         </template>
         <template slot="start">
             <b-navbar-item tag="router-link" :to="{ name: 'fabric_list' }">
-                Liste des tissus
+                {{ $t('nav.fabric.list') }}
             </b-navbar-item>
             <b-navbar-item tag="router-link" :to="{ name: 'fabric_add' }">
-                Ajouter un tissu
+                {{ $t('nav.fabric.add') }}
             </b-navbar-item>
             <b-navbar-item tag="router-link" :to="{ name: 'color_list' }">
-                Liste des couleurs
+                {{ $t('nav.color.list') }}
             </b-navbar-item>
             <b-navbar-item tag="router-link" :to="{ name: 'color_add' }">
-                Ajouter une couleur
+                {{ $t('nav.color.add') }}
             </b-navbar-item>
         </template>
 
         <template slot="end" v-if="isLoaded">
             <b-navbar-dropdown v-if="user.uuid" :label="user.username" right>
                 <b-navbar-item tag="router-link" :to="{ name: 'profile' }">
-                    Mon compte
+                    {{ $t('site.account') }}
                 </b-navbar-item>
                 <b-navbar-item @click="logout">
-                    Se déconnecter
+                    {{ $t('site.sign_out.action') }}
                 </b-navbar-item>
             </b-navbar-dropdown>
             <b-navbar-item tag="div" v-else>
@@ -37,14 +37,14 @@
                         :to="{ name: 'register' }"
                         type="is-primary"
                     >
-                        <strong>S'enregistrer</strong>
+                        <strong>{{ $t('site.sign_up.action') }}</strong>
                     </b-button>
                     <b-button
                         tag="router-link"
                         :to="{ name: 'login' }"
                         type="is-light"
                     >
-                        Se connecter
+                        {{ $t('site.sign_in.action') }}
                     </b-button>
                 </div>
             </b-navbar-item>
@@ -75,7 +75,7 @@ export default defineComponent({
                 this.$root.user = new User();
                 this.$buefy.toast.open({
                     duration: 3000,
-                    message: `Tu as bien été déconnecté·e !`,
+                    message: this.$t('site.sign_out.message').toString(),
                     position: 'is-top',
                     type: 'is-info'
                 });
