@@ -11,8 +11,7 @@
         "@mdi/font": "^5.7.55",
         "@vue/composition-api": "^1.0.0-beta.15",
         "axios": "^0.19.2",
-        "buefy": "^0.8.20",
-        "bulmaswatch": "^0.8.1",
+        "buefy": "^0.9.0",
         "vue": "^2.6.12",
         "vue-i18n": "^8.22.0",
         "vue-router": "^3.4.6"

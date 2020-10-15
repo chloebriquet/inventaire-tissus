@@ -2,17 +2,24 @@
     <div>
         <div class="fabric-list columns is-mobile">
             <div v-for="fabric in fabrics" :key="fabric.id" class="column is-12-mobile is-6-tablet is-4-desktop">
-                <fabric-list-element :fabric="fabric" @fabric-delete="confirmDelete(fabric)"/>
+                <fabric-list-element :fabric="fabric" @fabric-delete="confirmDelete(fabric)" />
             </div>
         </div>
-        <confirm-modal
-            :displayModal="displayModal"
-            @close="closeModal"
-            @confirm="deleteFabric"
-            @cancel="closeModal"
-            :modal-message="`Êtes-vous sûr·e de supprimer le tissu &quot;${fabricToDelete.material}&quot; ?`"
-            confirm-message="Oui, supprimer"
-            cancel-message="Non, annuler" />
+        <b-modal
+            v-model="displayModal"
+            has-modal-card
+            aria-role="alertdialog"
+            aria-modal>
+            <template #default="modal">
+                <confirm-modal
+                    @close="closeModal(modal)"
+                    @confirm="deleteFabric(modal)"
+                    :modal-message="$t('fabric.delete.confirm.message', {name: fabricToDelete.material})"
+                    :confirm-message="$t('fabric.delete.confirm.yes')"
+                    :cancel-message="$t('fabric.delete.confirm.no')"
+                />
+            </template>
+        </b-modal>
     </div>
 </template>
 
@@ -40,21 +47,21 @@ export default defineComponent({
         this.getFabrics();
     },
     methods: {
-        getFabrics: function () {
+        getFabrics: function (): void {
             API.get('fabrics')
                 .then(response => {
                     this.fabrics = response.data['hydra:member'];
                 });
         },
-        confirmDelete(fabric: Fabric) {
+        confirmDelete(fabric: Fabric): void {
             this.fabricToDelete = fabric;
             this.displayModal = true;
         },
-        closeModal() {
-            this.displayModal = false;
+        closeModal(modal: any): void {
+            modal.close();
             this.fabricToDelete = {} as Fabric;
         },
-        deleteFabric() {
+        deleteFabric(modal: any): void {
             const id = this.fabricToDelete?.id;
 
             if (typeof id !== 'undefined') {
@@ -69,10 +76,10 @@ export default defineComponent({
                 this.fabrics.splice(arrayId, 1);
             }
 
-            this.closeModal();
+            this.closeModal(modal);
         }
     }
-})
+});
 </script>
 
 <style lang="scss" scoped>
