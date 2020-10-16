@@ -2,7 +2,7 @@
     <section class="section">
         <div class="fabric-list columns is-mobile">
             <div v-for="fabric in fabrics" :key="fabric.id" class="column is-12-mobile is-6-tablet is-4-widescreen">
-                <fabric-list-element :fabric="fabric" @fabric-delete="confirmDelete(fabric)" />
+                <fabric-list-element :fabric="fabric" @fabric-edit="goToFabricForm" @fabric-delete="confirmDelete(fabric)" />
             </div>
         </div>
         <b-modal
@@ -73,6 +73,9 @@ export default defineComponent({
             }
 
             this.closeModal(modal);
+        },
+        goToFabricForm(fabric: Fabric) {
+            this.$emit('fabric-edit', fabric);
         }
     }
 });

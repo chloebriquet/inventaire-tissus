@@ -10,4 +10,7 @@ export default class FormField {
     resetError(): void {
         this.error = '';
     }
+    resetField(): void {
+        this.field = '';
+    }
 }

@@ -48,27 +48,75 @@ export default defineComponent({
     name: 'FabricForm',
     props: {
         fabric: {
-            type: Object as PropType<Fabric>,
-            default: () => new Fabric(),
+            type: Object as PropType<Fabric>|null,
+            default: null,
         },
     },
     data() {
         return {
             form: {
-                box: new FormField(this.fabric.box),
-                material: new FormField(this.fabric.material),
-                pattern: new FormField(this.fabric.pattern),
-                state: new FormField(this.fabric.state),
-                thickness: new FormField(this.fabric.thickness),
-                width: new FormField(this.fabric.width),
-                length: new FormField(this.fabric.length),
-                comment: new FormField(this.fabric.comment),
-                colors: new FormField(this.fabric.colors),
-                error: '' as string
-            } as { [key: string]: any }
+                box: new FormField(),
+                material: new FormField(),
+                pattern: new FormField(),
+                state: new FormField(),
+                thickness: new FormField(),
+                width: new FormField(),
+                length: new FormField(),
+                comment: new FormField(),
+                colors: new FormField(),
+            } as {[key: string]: FormField},
+        }
+    },
+    created() {
+        this.initForm();
+    },
+    watch: {
+        fabric: function () {
+            this.initForm();
         }
     },
     methods: {
+        initForm(): void {
+            this.resetForm();
+
+            if (null !== this.fabric) {
+                this.form.box.field = this.fabric.box;
+                this.form.material.field = this.fabric.material;
+                this.form.pattern.field = this.fabric.pattern;
+                this.form.state.field = this.fabric.state;
+                this.form.thickness.field = this.fabric.thickness;
+                this.form.width.field = this.fabric.width;
+                this.form.length.field = this.fabric.length;
+                this.form.comment.field = this.fabric.comment;
+                this.form.colors.field = this.fabric.colors;
+            }
+        },
+        resetErrors(): void {
+            this.form.box.resetError();
+            this.form.material.resetError();
+            this.form.pattern.resetError();
+            this.form.state.resetError();
+            this.form.thickness.resetError();
+            this.form.width.resetError();
+            this.form.length.resetError();
+            this.form.comment.resetError();
+            this.form.colors.resetError();
+        },
+        resetFields(): void {
+            this.form.box.resetField();
+            this.form.material.resetField();
+            this.form.pattern.resetField();
+            this.form.state.resetField();
+            this.form.thickness.resetField();
+            this.form.width.resetField();
+            this.form.length.resetField();
+            this.form.comment.resetField();
+            this.form.colors.resetField();
+        },
+        resetForm(): void {
+            this.resetErrors();
+            this.resetFields();
+        },
         saveFabric() {
 
         }

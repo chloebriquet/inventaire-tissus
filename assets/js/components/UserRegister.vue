@@ -97,9 +97,8 @@ export default defineComponent({
                 emailConfirmation: new FormField(),
                 password: new FormField(),
                 passwordConfirmation: new FormField(),
-                code: new FormField(),
-                error: '' as string
-            } as { [key: string]: any }
+                code: new FormField()
+            } as {[key: string]: FormField}
         };
     },
     methods: {
@@ -108,7 +107,7 @@ export default defineComponent({
 
             this.resetErrors();
 
-            const formData: { [key: string]: string } = {
+            const formData: {[key: string]: string} = {
                 username: this.form.username.field,
                 email: this.form.email.field,
                 emailConfirmation: this.form.emailConfirmation.field,
@@ -157,13 +156,17 @@ export default defineComponent({
             this.form.passwordConfirmation.resetError();
             this.form.code.resetError();
         },
+        resetFields(): void {
+            this.form.username.resetField();
+            this.form.email.resetField();
+            this.form.emailConfirmation.resetField();
+            this.form.password.resetField();
+            this.form.passwordConfirmation.resetField();
+            this.form.code.resetField();
+        },
         resetForm(): void {
-            this.form.username.field = new FormField();
-            this.form.email.field = new FormField();
-            this.form.emailConfirmation.field = new FormField();
-            this.form.password.field = new FormField();
-            this.form.passwordConfirmation.field = new FormField();
-            this.form.code.field = new FormField();
+            this.resetErrors();
+            this.resetFields();
         }
     }
 });

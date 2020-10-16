@@ -21,6 +21,9 @@
       "action": "Modifier",
       "link": "Modifier le tissu"
     },
+    "error": {
+      "fetched": "Un problème est survenu lors de la récupération du tissu."
+    },
     "field": {
       "box": "Carton",
       "material": "Matière",
