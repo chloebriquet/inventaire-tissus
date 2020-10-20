@@ -16,7 +16,7 @@
             </div>
         </div>
         <footer class="card-footer">
-            <router-link :to="{ name: 'fabric_see', params: { fabricId: fabric.id }}" class="card-footer-item">
+            <router-link :to="{name: 'fabric_see', params: { fabricId: fabric.id }}" class="card-footer-item">
                 <span class="is-sr-only">{{ $t('fabric.see.action') }}</span><b-icon icon="eye" />
             </router-link>
             <a @click="$emit('fabric-edit', fabric)" class="card-footer-item">

@@ -1,5 +1,12 @@
 <template>
-    <router-view v-if="isLoaded" :fabrics="fabrics" :fabric="selectedFabric" @fabric-edit="goToFabricForm" @fabric-delete="removeFabric"></router-view>
+    <router-view v-if="isLoaded"
+                 :fabrics="fabrics"
+                 :fabric="selectedFabric"
+                 @fabric-edit="goToFabricForm"
+                 @fabric-create="addFabric"
+                 @fabric-delete="removeFabric"
+                 @fabric-update="changeFabric"
+    ></router-view>
 </template>
 
 <script lang="ts">
@@ -30,22 +37,48 @@ export default defineComponent({
         },
     },
     methods: {
+        addFabric(id: number): void {
+            this.getFabric(id)
+                .then((fabric: Fabric) => {
+                    this.fabrics.push(fabric);
+                });
+        },
+        changeFabric(id: number): void {
+            this.getFabric(id)
+                .then((fabric: Fabric) => {
+                    const index = this.fabrics.findIndex((element: Fabric) => {
+                        return element.id === fabric.id;
+                    });
+
+                    if (-1 !== index) {
+                        this.fabrics.splice(index, 1, fabric);
+                    }
+                });
+        },
         checkFabric(): void {
             if (!this.isFabricSameAsSelected()) {
-                this.getFabric(Number(this.$route.params.fabricId));
+                this.isLoaded = false;
+                this.getFabric(Number(this.$route.params.fabricId))
+                    .then((fabric: Fabric) => {
+                        this.selectedFabric = fabric;
+                        this.isLoaded = true;
+                    })
+                    .catch(() => {
+                        this.selectedFabric = {} as Fabric;
+                    });
             }
         },
-        getFabric(id: number): void {
-            this.isLoaded = false;
-            API.get(`fabrics/${id}`)
-                .then(response => {
-                    this.selectedFabric = response.data;
-                    this.isLoaded = true;
-                })
-                .catch(() => {
-                    this.selectedFabric = {} as Fabric;
-                    this.notification.error('fabric.error.fetched');
-                });
+        getFabric(id: number): Promise<Fabric> {
+            return new Promise<Fabric>((resolve, reject) => {
+                API.get(`fabrics/${id}`)
+                    .then(response => {
+                        resolve(response.data);
+                    })
+                    .catch(() => {
+                        this.notification.error('fabric.error.fetched');
+                        reject();
+                    });
+            });
         },
         getFabrics: function (): void {
             this.isLoaded = false;

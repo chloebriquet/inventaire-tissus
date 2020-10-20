@@ -1,6 +1,7 @@
 {
   "code": "Code",
   "common": {
+    "cancel": "Annuler",
     "notification": {
       "close": "Fermer la notification",
       "contact_admin": "Merci de t'adresser à l'administratrice du site (à savoir Chloé).",
