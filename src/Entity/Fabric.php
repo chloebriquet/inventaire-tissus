@@ -27,35 +27,35 @@ class Fabric
     /**
      * @ORM\Column(type="integer")
      *
-     * @Assert\NotBlank(message="not_blank")
+     * @Assert\NotBlank
      */
     public int $box;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank(message="not_blank")
+     * @Assert\NotBlank
      */
     public string $material;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank(message="not_blank")
+     * @Assert\NotBlank
      */
     public string $pattern;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank(message="not_blank")
+     * @Assert\NotBlank
      */
     public string $state;
 
     /**
      * @ORM\Column(type="string", length=255)
      *
-     * @Assert\NotBlank(message="not_blank")
+     * @Assert\NotBlank
      */
     public string $thickness;
 
@@ -127,10 +127,9 @@ class Fabric
     public function updateTimestamps(): void
     {
         $now = new \DateTimeImmutable();
-
         $this->updatedAt = $now;
         if (null === $this->createdAt) {
-            $this->updatedAt = $now;
+            $this->createdAt = $now;
         }
     }
 }

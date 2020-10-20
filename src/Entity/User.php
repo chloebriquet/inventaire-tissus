@@ -14,8 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  *
- * @UniqueEntity("username", message="unique_entity")
- * @UniqueEntity("email", message="unique_entity")
+ * @UniqueEntity("username")
+ * @UniqueEntity("email")
  * @HasSameValue(fields={"plainPassword", "passwordConfirmation"}, type="Le mot de passe", errorPath="passwordConfirmation", groups={"user:create"})
  * @HasSameValue(fields={"email", "emailConfirmation"}, type="L'email", errorPath="emailConfirmation", groups={"user:create"})
  *
@@ -34,15 +34,15 @@ class User implements UserInterface
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      *
-     * @Assert\NotBlank(message="not_blank")
+     * @Assert\NotBlank
      */
     public string $username;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      *
-     * @Assert\Email(message="email")
-     * @Assert\NotBlank(message="not_blank")
+     * @Assert\Email
+     * @Assert\NotBlank
      */
     public string $email;
 
@@ -63,18 +63,18 @@ class User implements UserInterface
     public ?string $password = null;
 
     /**
-     * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
-     * @Assert\Regex("/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!-/:-@[-`{-~])[a-zA-Z0-9!-/:-@[-`{-~]{8,}$/", message="password.composition")
+     * @Assert\NotBlank(groups={"user:create"})
+     * @Assert\Regex("/^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[!-\/:-@[-`{-~])[a-zA-Z0-9!-\/:-@[-`{-~]{8,}$/", message="password.composition")
      */
     public ?string $plainPassword = null;
 
     /**
-     * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
+     * @Assert\NotBlank(groups={"user:create"})
      */
     public ?string $passwordConfirmation = null;
 
     /**
-     * @Assert\NotBlank(groups={"user:create"}, message="not_blank")
+     * @Assert\NotBlank(groups={"user:create"})
      * @IsCodeAvailable
      */
     public ?string $code = null;
