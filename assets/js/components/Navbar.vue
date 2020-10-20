@@ -53,9 +53,10 @@
 </template>
 
 <script lang="ts">
-import User from '../models/user';
-import {API} from '../http-common';
 import {defineComponent} from '@vue/composition-api';
+import {API} from '../utils/http-common';
+import User from '../models/User';
+import Toast from '../utils/notification/Toast';
 
 export default defineComponent({
     name: 'Navbar',
@@ -69,16 +70,17 @@ export default defineComponent({
             default: false
         }
     },
+    data() {
+        return {
+            toast: new Toast() as Toast,
+        }
+    },
     methods: {
         logout(): void {
             API.post(window.location.origin + '/api/logout').finally(() => {
                 this.$root.user = new User();
-                this.$buefy.toast.open({
-                    duration: 3000,
-                    message: this.$t('site.sign_out.message').toString(),
-                    position: 'is-top',
-                    type: 'is-info'
-                });
+                this.toast.success('site.sign_out.message');
+                this.$router.push({name: 'home'});
             });
         }
     }

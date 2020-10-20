@@ -25,8 +25,8 @@
 
 <script lang="ts">
 import {defineComponent, PropType} from '@vue/composition-api';
-import {API} from '../http-common';
-import Fabric from '../models/fabric';
+import {API} from '../utils/http-common';
+import Fabric from '../models/Fabric';
 import FabricListElement from './FabricListElement.vue';
 import ConfirmModal from './ConfirmModal.vue';
 

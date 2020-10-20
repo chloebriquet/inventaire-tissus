@@ -1,4 +1,4 @@
-import Color from './color';
+import Color from './Color';
 
 export default class Fabric {
     '@context'?: string;

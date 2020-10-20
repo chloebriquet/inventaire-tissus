@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Buefy from 'buefy';
-import i18n from './i18n';
+import i18n from './utils/i18n';
 
 import '@mdi/font/css/materialdesignicons.min.css';
 import '../scss/style.scss';
@@ -9,7 +9,7 @@ import '../scss/style.scss';
 import './utils/compositionPlugin';
 
 import App from './views/App.vue';
-import User from './models/user';
+import User from './models/User';
 import router from './router';
 
 Vue.use(VueRouter);

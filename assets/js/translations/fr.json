@@ -2,7 +2,19 @@
   "code": "Code",
   "common": {
     "notification": {
-      "close": "Fermer la notification"
+      "close": "Fermer la notification",
+      "contact_admin": "Merci de t'adresser à l'administratrice du site (à savoir Chloé).",
+      "error": {
+        "base": "Un problème est survenu lors",
+        "creation": "@:common.notification.error.base de l'enregistrement. @:common.notification.contact_admin",
+        "deletion": "@:common.notification.error.base de la suppression. @:common.notification.contact_admin",
+        "update": "@:common.notification.error.base de la modification. @:common.notification.contact_admin"
+      },
+      "success": {
+        "creation": "L'enregistrement a bien été effectué.",
+        "deletion": "La suppression a bien été effectuée.",
+        "update": "La modification a bien été effectuée."
+      }
     }
   },
   "fabric": {
@@ -32,7 +44,8 @@
       "thickness": "Épaisseur",
       "width": "Largeur",
       "length": "Longueur",
-      "comment": "Commentaire"
+      "comment": "Commentaire",
+      "colors": "Couleurs"
     },
     "see": {
       "action": "Voir le tissu"

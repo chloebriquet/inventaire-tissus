@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router';
 
-import Fabric from "./views/Fabric.vue";
+import Fabric from './views/Fabric.vue';
 import FabricElement from './components/FabricElement.vue';
 import FabricList from './components/FabricList.vue';
 import FabricForm from './components/FabricForm.vue';

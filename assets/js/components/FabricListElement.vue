@@ -32,7 +32,7 @@
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
 import {PropType} from '@vue/composition-api';
-import Fabric from '../models/fabric';
+import Fabric from '../models/Fabric';
 
 export default defineComponent({
     name: 'FabricListElement',

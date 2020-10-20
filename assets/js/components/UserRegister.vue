@@ -82,10 +82,11 @@
 </template>
 
 <script lang="ts">
-import {API} from '../http-common';
-import Violation from '../types/violation';
-import FormField from '../types/formField';
 import {defineComponent} from '@vue/composition-api';
+import {API} from '../utils/http-common';
+import Violation from '../types/Violation';
+import FormField from '../types/FormField';
+import Notification from '../utils/notification/Notification';
 
 export default defineComponent({
     name: 'Register',
@@ -98,7 +99,8 @@ export default defineComponent({
                 password: new FormField(),
                 passwordConfirmation: new FormField(),
                 code: new FormField()
-            } as {[key: string]: FormField}
+            } as {[key: string]: FormField},
+            notification: new Notification() as Notification,
         };
     },
     methods: {
@@ -117,20 +119,13 @@ export default defineComponent({
             };
 
             API.post('/users', formData)
-                .then(response => {
+                .then(() => {
                     this.resetForm();
-                    this.$buefy.toast.open({
-                        duration: 3000,
-                        message: `L'enregistrement a bien été effectué.`,
-                        position: 'is-top',
-                        type: 'is-info'
-                    });
+                    this.notification.creationSuccess();
                     this.$router.push({ name: 'login' });
                 })
                 .catch(error => {
-                    const status = error.response.status;
-
-                    if (400 === status) {
+                    if (400 === error.response.status) {
                         const data = error.response.data;
                         data.violations.forEach((violation: Violation) => {
                             if (violation.propertyPath in this.form) {
@@ -139,12 +134,7 @@ export default defineComponent({
                             }
                         });
                     } else {
-                        this.$buefy.notification.open({
-                            duration: 5000,
-                            message: `Un problème est survenu lors de l'enregistrement. Merci de t'adresser à l'administratrice du site (à savoir Chloé).`,
-                            position: 'is-bottom',
-                            type: 'is-danger'
-                        });
+                        this.notification.creationError();
                     }
                 });
         },

@@ -51,8 +51,9 @@
 </template>
 
 <script lang="ts">
-import HTTP, { API } from '../http-common';
-import {defineComponent} from "@vue/composition-api";
+import HTTP, {API} from '../utils/http-common';
+import Notification from '../utils/notification/Notification';
+import {defineComponent} from '@vue/composition-api';
 
 export default defineComponent({
     name: 'Login',
@@ -63,7 +64,8 @@ export default defineComponent({
                 password: '' as string,
                 rememberMe: false as boolean,
                 error: '' as string
-            }
+            } as {[key: string]: any},
+            notification: new Notification() as Notification,
         };
     },
     methods: {
@@ -96,12 +98,7 @@ export default defineComponent({
                     this.$root.user = response.data;
                 })
                 .catch(() => {
-                    this.$buefy.notification.open({
-                        duration: 5000,
-                        message: this.$t('sign_in.error.fetched_user').toString(),
-                        position: 'is-bottom',
-                        type: 'is-danger'
-                    });
+                    this.notification.error('sign_in.error.fetched_user');
                 });
         },
         resetError(): void {

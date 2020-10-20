@@ -4,8 +4,9 @@
 
 <script lang="ts">
 import {defineComponent} from '@vue/composition-api';
-import {API} from '../http-common';
-import Fabric from '../models/fabric';
+import {API} from '../utils/http-common';
+import Fabric from '../models/Fabric';
+import Notification from '../utils/notification/Notification';
 
 export default defineComponent({
     name: 'Fabric',
@@ -13,9 +14,10 @@ export default defineComponent({
         return {
             displayModal: false,
             fabrics: [] as Fabric[],
-            fabricToDelete: {} as Fabric,
+            fabricToDelete: null as null|Fabric,
             isLoaded: true as boolean,
-            selectedFabric: {} as Fabric,
+            notification: new Notification() as Notification,
+            selectedFabric: null as null|Fabric,
         };
     },
     mounted() {
@@ -42,12 +44,7 @@ export default defineComponent({
                 })
                 .catch(() => {
                     this.selectedFabric = {} as Fabric;
-                    this.$buefy.notification.open({
-                        duration: 5000,
-                        message: this.$t('fabric.error.fetched').toString(),
-                        position: 'is-bottom',
-                        type: 'is-danger'
-                    });
+                    this.notification.error('fabric.error.fetched');
                 });
         },
         getFabrics: function (): void {
@@ -66,13 +63,13 @@ export default defineComponent({
             const hasRouteFabricId: boolean = 'fabricId' in this.$route.params;
 
             if (!hasRouteFabricId) {
-                this.selectedFabric = {} as Fabric;
+                this.selectedFabric = null as null|Fabric;
                 return true;
             }
 
             const fabricId: number = Number(this.$route.params.fabricId);
 
-            return fabricId === this.selectedFabric.id;
+            return fabricId === this.selectedFabric?.id;
         },
         removeFabric(id: number): void {
             this.fabrics.splice(id, 1);

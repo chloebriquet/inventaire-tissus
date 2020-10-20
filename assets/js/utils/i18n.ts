@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import fr from './translations/fr.json';
+import fr from '../translations/fr.json';
 
 Vue.use(VueI18n);
 
