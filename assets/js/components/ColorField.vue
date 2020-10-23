@@ -1,5 +1,10 @@
 <template>
-    <b-checkbox v-model="checked" :native-value="nativeValue">{{ color.name }}</b-checkbox>
+    <div class="media">
+        <figure class="media-left" :style="`background-color: ${color.code}`"></figure>
+        <div class="media-content">
+            <b-checkbox v-model="checked" :native-value="nativeValue">{{ color.name }}</b-checkbox>
+        </div>
+    </div>
 </template>
 
 <script lang="ts">
@@ -36,5 +41,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.media {
+    border-top: none;
+    align-items: center;
+}
 
+figure {
+    height: 2rem;
+    width: 2rem;
+}
 </style>

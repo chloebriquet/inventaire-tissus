@@ -63,7 +63,11 @@
                     :message="form.colors.error"
                     :type="{ 'is-danger': form.colors.error }"
                 >
-                    <color-field v-for="color in colors" :color="color" :key="color.id" v-model="form.colors.field" :native-value="color['@id']" />
+                    <div class="columns colors">
+                        <div v-for="color in colors" class="column is-6">
+                            <color-field :color="color" :key="color.id" v-model="form.colors.field" :native-value="color['@id']" />
+                        </div>
+                    </div>
                 </b-field>
                 <div class="buttons is-centered">
                     <b-button
@@ -269,5 +273,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
+.colors {
+    flex-wrap: wrap;
+    height: 10rem;
+    overflow: auto;
+}
 </style>
