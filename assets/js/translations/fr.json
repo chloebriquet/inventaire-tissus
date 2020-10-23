@@ -8,6 +8,7 @@
       "error": {
         "base": "Un problème est survenu lors",
         "creation": "@:common.notification.error.base de l'enregistrement. @:common.notification.contact_admin",
+        "default": "@:common.notification.error.base de l'affichage de la page. @:common.notification.contact_admin",
         "deletion": "@:common.notification.error.base de la suppression. @:common.notification.contact_admin",
         "update": "@:common.notification.error.base de la modification. @:common.notification.contact_admin"
       },

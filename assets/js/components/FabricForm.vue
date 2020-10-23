@@ -63,7 +63,7 @@
                     :message="form.colors.error"
                     :type="{ 'is-danger': form.colors.error }"
                 >
-                    <b-checkbox v-for="color in colors" :key="color.id" v-model="form.colors.field" :native-value="color['@id']">{{ color.name }}</b-checkbox>
+                    <color-field v-for="color in colors" :color="color" :key="color.id" v-model="form.colors.field" :native-value="color['@id']" />
                 </b-field>
                 <div class="buttons is-centered">
                     <b-button
@@ -94,18 +94,18 @@ import Color from '../models/Color';
 import Fabric from '../models/Fabric';
 import FormField from '../types/FormField';
 import Violation from '../types/Violation';
-import ConfirmModal from './ConfirmModal.vue';
+import ColorField from './ColorField.vue';
 
 export default defineComponent({
     name: 'FabricForm',
-    components: {
-        ConfirmModal,
-    },
     props: {
         fabric: {
             type: Object as null|PropType<Fabric>,
             default: null,
         },
+    },
+    components: {
+        ColorField,
     },
     data() {
         return {
@@ -137,6 +137,8 @@ export default defineComponent({
             this.resetForm();
             this.getColors()
                 .then(() => {
+                    this.isLoaded = true;
+
                     if (null !== this.fabric) {
                         this.form.box.field = this.fabric.box;
                         this.form.material.field = this.fabric.material;
@@ -150,15 +152,21 @@ export default defineComponent({
                             return color['@id'];
                         });
                     }
+                })
+                .catch(() => {
+                    this.notification.error('common.notification.error.default');
                 });
         },
         getColors(): Promise<void> {
-            return new Promise<void>(resolve => {
+            return new Promise<void>((resolve, reject) => {
                 API.get('/colors')
                     .then(response => {
                         this.colors = response.data['hydra:member'];
                         this.form.colors.field = [];
                         resolve();
+                    })
+                    .catch(() => {
+                        reject();
                     });
             })
         },
