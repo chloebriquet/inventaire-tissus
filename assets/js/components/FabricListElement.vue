@@ -3,7 +3,7 @@
         <div class="card-content">
             <div class="media">
                 <div class="media-left">
-                    <figure v-for="color in fabric.colors" class="image is-48x48" :style="`background-color: ${color.code}`"></figure>
+                    <figure v-for="color in fabric.colors" :style="`background-color: ${color.code}; width: ${colorWidth(fabric)}rem;`"></figure>
                 </div>
                 <div class="media-content">
                     <p class="title is-4">{{ fabric.material }}</p>
@@ -39,6 +39,11 @@ export default defineComponent({
     props: {
         fabric: Object as PropType<Fabric>,
     },
+    methods: {
+        colorWidth(fabric: Fabric): number {
+            return 3/fabric.colors.length;
+        }
+    }
 })
 </script>
 
@@ -47,5 +52,12 @@ export default defineComponent({
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+.media-left {
+    display: flex;
+    flex-direction: row;
+}
+figure {
+    height: 3rem;
 }
 </style>
