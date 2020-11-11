@@ -77,6 +77,14 @@ cs-fixer: php-cs-fixer ## Apply php-cs-fixer
 	$(ECHO) "Running php-cs-fixer"
 	$(EXEC_PHP_CONTAINER) php php-cs-fixer fix --config=.php_cs.dist -v --using-cache=no
 
+phpstan: ## Run phpstan
+	$(ECHO) "Running phpstan"
+	$(EXEC_PHP_CONTAINER) vendor/bin/phpstan analyse
+
+es-lint: # Run es-lint
+	$(ECHO) "Running es-lint"
+	$(EXEC_PHP_CONTAINER) ./node_modules/.bin/eslint
+
 tests: ## Run unit tests
 	$(ECHO) "Running tests"
 	$(EXEC_PHP_CONTAINER) bin/phpunit
@@ -84,6 +92,8 @@ tests: ## Run unit tests
 symfony-security: ## Check security of your dependencies (https://security.sensiolabs.org/)
 	$(ECHO) "Checking Symfony vendor security"
 	$(SYMFONY) security:check
+
+quality: cs-fixer phpstan es-lint symfony-security ## Shortcut for all quality & security commands
 
 ##
 ## Debug

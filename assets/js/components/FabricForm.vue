@@ -7,7 +7,11 @@
                     :message="form.box.error"
                     :type="{ 'is-danger': form.box.error }"
                 >
-                    <b-input type="number" v-model="form.box.field" required></b-input>
+                    <b-input
+                        type="number"
+                        v-model="form.box.field"
+                        required
+                    ></b-input>
                 </b-field>
                 <b-field
                     :label="$t('fabric.field.material')"
@@ -49,14 +53,21 @@
                     :message="form.length.error"
                     :type="{ 'is-danger': form.length.error }"
                 >
-                    <b-input type="number" v-model="form.length.field"></b-input>
+                    <b-input
+                        type="number"
+                        v-model="form.length.field"
+                    ></b-input>
                 </b-field>
                 <b-field
                     :label="$t('fabric.field.comment')"
                     :message="form.comment.error"
                     :type="{ 'is-danger': form.comment.error }"
                 >
-                    <b-input type="textarea" v-model="form.comment.field" maxlength="255"></b-input>
+                    <b-input
+                        type="textarea"
+                        v-model="form.comment.field"
+                        maxlength="255"
+                    ></b-input>
                 </b-field>
                 <b-field
                     :label="$t('fabric.field.colors')"
@@ -65,7 +76,12 @@
                 >
                     <div class="columns colors">
                         <div v-for="color in colors" class="column is-6">
-                            <color-field :color="color" :key="color.id" v-model="form.colors.field" :native-value="color['@id']" />
+                            <color-field
+                                :color="color"
+                                :key="color.id"
+                                v-model="form.colors.field"
+                                :native-value="color['@id']"
+                            />
                         </div>
                     </div>
                 </b-field>
@@ -74,7 +90,11 @@
                         tag="input"
                         native-type="submit"
                         type="is-dark"
-                        :value="null !== fabric ? $t('fabric.edit.action') : $t('fabric.add.action')"
+                        :value="
+                            null !== fabric
+                                ? $t('fabric.edit.action')
+                                : $t('fabric.add.action')
+                        "
                     />
                     <b-button
                         tag="input"
@@ -90,9 +110,9 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from '@vue/composition-api';
-import {AxiosResponse} from 'axios';
-import {API} from '../utils/http-common';
+import { defineComponent, PropType } from '@vue/composition-api';
+import { AxiosResponse } from 'axios';
+import { API } from '../utils/http-common';
 import Notification from '../utils/notification/Notification';
 import Color from '../models/Color';
 import Fabric from '../models/Fabric';
@@ -104,12 +124,12 @@ export default defineComponent({
     name: 'FabricForm',
     props: {
         fabric: {
-            type: Object as null|PropType<Fabric>,
-            default: null,
-        },
+            type: Object as null | PropType<Fabric>,
+            default: null
+        }
     },
     components: {
-        ColorField,
+        ColorField
     },
     data() {
         return {
@@ -123,16 +143,16 @@ export default defineComponent({
                 width: new FormField(),
                 length: new FormField(),
                 comment: new FormField(),
-                colors: new FormField(),
-            } as {[key: string]: FormField},
-            notification: new Notification() as Notification,
-        }
+                colors: new FormField()
+            } as { [key: string]: FormField },
+            notification: new Notification() as Notification
+        };
     },
     created() {
         this.initForm();
     },
     watch: {
-        fabric: function () {
+        fabric: function() {
             this.initForm();
         }
     },
@@ -152,13 +172,17 @@ export default defineComponent({
                         this.form.width.field = this.fabric.width;
                         this.form.length.field = this.fabric.length;
                         this.form.comment.field = this.fabric.comment;
-                        this.form.colors.field = this.fabric.colors.map(color => {
-                            return color['@id'];
-                        });
+                        this.form.colors.field = this.fabric.colors.map(
+                            color => {
+                                return color['@id'];
+                            }
+                        );
                     }
                 })
                 .catch(() => {
-                    this.notification.error('common.notification.error.default');
+                    this.notification.error(
+                        'common.notification.error.default'
+                    );
                 });
         },
         getColors(): Promise<void> {
@@ -172,31 +196,38 @@ export default defineComponent({
                     .catch(() => {
                         reject();
                     });
-            })
+            });
         },
         goBack(): void {
             this.resetForm();
             this.$router.go(-1);
         },
-        createFabric(formData: {[key: string]: string}): void {
+        createFabric(formData: { [key: string]: string }): void {
             API.post('/fabrics', formData)
                 .then((response: AxiosResponse<Fabric>) => {
                     this.notification.creationSuccess();
                     this.$emit('fabric-create', response.data.id);
-                    this.$router.push({name: 'fabric_see', params: { fabricId: response.data.id.toString() }});
+                    this.$router.push({
+                        name: 'fabric_see',
+                        params: { fabricId: response.data.id.toString() }
+                    });
                 })
                 .catch(error => {
-                    this.displayErrors(error.response, () => this.notification.creationError());
+                    this.displayErrors(error.response, () =>
+                        this.notification.creationError()
+                    );
                 });
         },
-        updateFabric(formData: {[key: string]: string}): void {
+        updateFabric(formData: { [key: string]: string }): void {
             API.put(`/fabrics/${this.fabric.id}`, formData)
                 .then(response => {
                     this.notification.updateSuccess();
                     this.$emit('fabric-update', response.data.id);
                 })
                 .catch(error => {
-                    this.displayErrors(error.response, () => this.notification.updateError());
+                    this.displayErrors(error.response, () =>
+                        this.notification.updateError()
+                    );
                 });
         },
         displayErrors(error: AxiosResponse, displayError: Function): void {
@@ -222,7 +253,7 @@ export default defineComponent({
 
             this.resetErrors();
 
-            const formData: {[key: string]: any} = {
+            const formData: { [key: string]: any } = {
                 box: Number(this.form.box.field),
                 material: this.form.material.field,
                 pattern: this.form.pattern.field,
@@ -231,7 +262,7 @@ export default defineComponent({
                 width: Number(this.form.width.field),
                 length: Number(this.form.length.field),
                 comment: this.form.comment.field,
-                colors: this.form.colors.field,
+                colors: this.form.colors.field
             };
 
             if (null === this.fabric) {
@@ -267,9 +298,9 @@ export default defineComponent({
         resetForm(): void {
             this.resetErrors();
             this.resetFields();
-        },
+        }
     }
-})
+});
 </script>
 
 <style lang="scss" scoped>

@@ -53,8 +53,8 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
-import {API} from '../utils/http-common';
+import { defineComponent } from '@vue/composition-api';
+import { API } from '../utils/http-common';
 import User from '../models/User';
 import Toast from '../utils/notification/Toast';
 
@@ -72,15 +72,15 @@ export default defineComponent({
     },
     data() {
         return {
-            toast: new Toast() as Toast,
-        }
+            toast: new Toast() as Toast
+        };
     },
     methods: {
         logout(): void {
             API.post(window.location.origin + '/api/logout').finally(() => {
                 this.$root.user = new User();
                 this.toast.success('site.sign_out.message');
-                this.$router.push({name: 'home'});
+                this.$router.push({ name: 'home' });
             });
         }
     }

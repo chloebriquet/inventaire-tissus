@@ -1,6 +1,6 @@
 import AbstractNotification from './AbstractNotification';
-import {NotificationProgrammatic} from 'buefy';
-import {ColorModifiers, GlobalPositions} from 'buefy/types/helpers';
+import { NotificationProgrammatic } from 'buefy';
+import { ColorModifiers, GlobalPositions } from 'buefy/types/helpers';
 
 export default class Notification extends AbstractNotification {
     protected open(
@@ -31,7 +31,12 @@ export default class Notification extends AbstractNotification {
     }
 
     public error(message: string = this.defaultErrorMessage): void {
-        this.open(message, this.defaultErrorDuration, this.defaultErrorPosition, this.defaultErrorType);
+        this.open(
+            message,
+            this.defaultErrorDuration,
+            this.defaultErrorPosition,
+            this.defaultErrorType
+        );
     }
     public creationError(): void {
         this.error();

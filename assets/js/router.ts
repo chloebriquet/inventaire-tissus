@@ -13,25 +13,30 @@ import Home from './components/Home.vue';
 import NotFound from './components/NotFound.vue';
 
 const routes = [
-    {
-        path: '/fabrics', component: Fabric,
-        children: [
-            { path: '/', name: 'fabric_list', component: FabricList },
-            { path: 'add', name: 'fabric_add', component: FabricForm },
-            { path: ':fabricId', name: 'fabric_see', component: FabricElement },
-            { path: ':fabricId/edit', name: 'fabric_edit', component: FabricForm },
-        ]
-    },
-    { path: '/colors', name: 'color_list', component: ColorList },
-    { path: '/colors/add', name: 'color_add', component: ColorForm },
-    { path: '/login', name: 'login', component: Login },
-    { path: '/register', name: 'register', component: Register },
-    { path: '/profile', name: 'profile', component: Profile },
-    { path: '/', name: 'home', component: Home },
-    { path: '*', name: 'not_found', component: NotFound }
+  {
+    path: '/fabrics',
+    component: Fabric,
+    children: [
+      { path: '/', name: 'fabric_list', component: FabricList },
+      { path: 'add', name: 'fabric_add', component: FabricForm },
+      { path: ':fabricId', name: 'fabric_see', component: FabricElement },
+      {
+        path: ':fabricId/edit',
+        name: 'fabric_edit',
+        component: FabricForm,
+      },
+    ],
+  },
+  { path: '/colors', name: 'color_list', component: ColorList },
+  { path: '/colors/add', name: 'color_add', component: ColorForm },
+  { path: '/login', name: 'login', component: Login },
+  { path: '/register', name: 'register', component: Register },
+  { path: '/profile', name: 'profile', component: Profile },
+  { path: '/', name: 'home', component: Home },
+  { path: '*', name: 'not_found', component: NotFound },
 ];
 
 export default new VueRouter({
-    mode: 'history',
-    routes
+  mode: 'history',
+  routes,
 });

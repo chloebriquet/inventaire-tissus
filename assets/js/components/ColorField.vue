@@ -1,30 +1,35 @@
 <template>
     <div class="media">
-        <figure class="media-left" :style="`background-color: ${color.code}`"></figure>
+        <figure
+            class="media-left"
+            :style="`background-color: ${color.code}`"
+        ></figure>
         <div class="media-content">
-            <b-checkbox v-model="checked" :native-value="nativeValue">{{ color.name }}</b-checkbox>
+            <b-checkbox v-model="checked" :native-value="nativeValue">{{
+                color.name
+            }}</b-checkbox>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from '@vue/composition-api';
+import { defineComponent, PropType } from '@vue/composition-api';
 import Color from '../models/Color';
 
 export default defineComponent({
     name: 'ColorField',
     props: {
         color: {
-            type: Object as null|PropType<Color>,
-            default: null,
+            type: Object as null | PropType<Color>,
+            default: null
         },
         value: {
             type: Array as PropType<Array<String>>,
-            default: [],
+            default: []
         },
         nativeValue: {
             type: String,
-            default: '',
+            default: ''
         }
     },
     computed: {
@@ -35,8 +40,8 @@ export default defineComponent({
             set(id: string): void {
                 this.$emit('input', id);
             }
-        },
-    },
+        }
+    }
 });
 </script>
 

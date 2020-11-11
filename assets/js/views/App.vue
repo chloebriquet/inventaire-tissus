@@ -10,13 +10,13 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
+import { defineComponent } from '@vue/composition-api';
 import Navbar from '../components/Navbar.vue';
 
 export default defineComponent({
     name: 'App',
     components: {
-        Navbar,
+        Navbar
     }
 });
 </script>

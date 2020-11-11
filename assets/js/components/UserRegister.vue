@@ -17,7 +17,11 @@
                 >
                     <b-input v-model="form.username.field" required></b-input>
                 </b-field>
-                <b-field :label="$t('user.email.main')" :message="form.email.error" :type="{ 'is-danger': form.email.error }">
+                <b-field
+                    :label="$t('user.email.main')"
+                    :message="form.email.error"
+                    :type="{ 'is-danger': form.email.error }"
+                >
                     <b-input
                         type="email"
                         v-model="form.email.field"
@@ -46,7 +50,9 @@
                         type="password"
                         v-model="form.password.field"
                         :pattern="$t('user.password.validation.regex')"
-                        :validation-message="$t('user.password.validation.message')"
+                        :validation-message="
+                            $t('user.password.validation.message')
+                        "
                         password-reveal
                         required
                     ></b-input>
@@ -65,7 +71,11 @@
                         @paste.native.prevent
                     ></b-input>
                 </b-field>
-                <b-field :label="$t('code')" :message="form.code.error" :type="{ 'is-danger': form.code.error }">
+                <b-field
+                    :label="$t('code')"
+                    :message="form.code.error"
+                    :type="{ 'is-danger': form.code.error }"
+                >
                     <b-input v-model="form.code.field" required></b-input>
                 </b-field>
                 <div class="buttons is-centered">
@@ -82,8 +92,8 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
-import {API} from '../utils/http-common';
+import { defineComponent } from '@vue/composition-api';
+import { API } from '../utils/http-common';
 import Violation from '../types/Violation';
 import FormField from '../types/FormField';
 import Notification from '../utils/notification/Notification';
@@ -99,8 +109,8 @@ export default defineComponent({
                 password: new FormField(),
                 passwordConfirmation: new FormField(),
                 code: new FormField()
-            } as {[key: string]: FormField},
-            notification: new Notification() as Notification,
+            } as { [key: string]: FormField },
+            notification: new Notification() as Notification
         };
     },
     methods: {
@@ -109,7 +119,7 @@ export default defineComponent({
 
             this.resetErrors();
 
-            const formData: {[key: string]: string} = {
+            const formData: { [key: string]: string } = {
                 username: this.form.username.field,
                 email: this.form.email.field,
                 emailConfirmation: this.form.emailConfirmation.field,

@@ -8,13 +8,13 @@ const withCredentials: boolean = true;
 const defaultConfig: AxiosRequestConfig = {
   baseURL: baseUrl,
   headers: headers,
-  withCredentials: withCredentials
+  withCredentials: withCredentials,
 };
 
 const apiConfig: AxiosRequestConfig = {
   baseURL: apiUrl,
   headers: headers,
-  withCredentials: withCredentials
+  withCredentials: withCredentials,
 };
 
 export default axios.create(defaultConfig);

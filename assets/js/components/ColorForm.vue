@@ -1,15 +1,11 @@
-<template>
-
-</template>
+<template> </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
+import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
-    name: "ColorForm"
-})
+    name: 'ColorForm'
+});
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

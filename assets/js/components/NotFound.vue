@@ -1,15 +1,11 @@
-<template>
-
-</template>
+<template> </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
+import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
-    name: "NotFound"
-})
+    name: 'NotFound'
+});
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

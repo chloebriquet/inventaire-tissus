@@ -51,9 +51,9 @@
 </template>
 
 <script lang="ts">
-import HTTP, {API} from '../utils/http-common';
+import HTTP, { API } from '../utils/http-common';
 import Notification from '../utils/notification/Notification';
-import {defineComponent} from '@vue/composition-api';
+import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
     name: 'Login',
@@ -64,8 +64,8 @@ export default defineComponent({
                 password: '' as string,
                 rememberMe: false as boolean,
                 error: '' as string
-            } as {[key: string]: any},
-            notification: new Notification() as Notification,
+            } as { [key: string]: any },
+            notification: new Notification() as Notification
         };
     },
     methods: {
@@ -77,10 +77,7 @@ export default defineComponent({
             const formData: FormData = new FormData();
             formData.append('username', this.form.username);
             formData.append('password', this.form.password);
-            formData.append(
-                '_remember_me',
-                this.form.rememberMe ? 'on' : ''
-            );
+            formData.append('_remember_me', this.form.rememberMe ? 'on' : '');
 
             API.post('/login', formData)
                 .then(response => {

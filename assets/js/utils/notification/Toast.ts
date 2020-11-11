@@ -1,6 +1,6 @@
 import AbstractNotification from './AbstractNotification';
-import {ToastProgrammatic} from 'buefy';
-import {ColorModifiers, GlobalPositions} from 'buefy/types/helpers';
+import { ToastProgrammatic } from 'buefy';
+import { ColorModifiers, GlobalPositions } from 'buefy/types/helpers';
 
 export default class Toast extends AbstractNotification {
     protected open(

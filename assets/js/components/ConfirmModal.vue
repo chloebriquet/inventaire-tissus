@@ -6,10 +6,20 @@
             </div>
         </div>
         <footer class="modal-card-foot">
-            <a @click="$emit('confirm')" :class="`card-footer-item ${confirmClass}`">
-                {{ confirmMessage ? confirmMessage : $t('modal.default.confirm') }}
+            <a
+                @click="$emit('confirm')"
+                :class="`card-footer-item ${confirmClass}`"
+            >
+                {{
+                    confirmMessage
+                        ? confirmMessage
+                        : $t('modal.default.confirm')
+                }}
             </a>
-            <a @click="$emit('close');" :class="`card-footer-item ${cancelClass}`">
+            <a
+                @click="$emit('close')"
+                :class="`card-footer-item ${cancelClass}`"
+            >
                 {{ cancelMessage ? cancelMessage : $t('modal.default.cancel') }}
             </a>
         </footer>
@@ -17,7 +27,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
+import { defineComponent } from '@vue/composition-api';
 
 export default defineComponent({
     name: 'ConfirmModal',
@@ -36,11 +46,9 @@ export default defineComponent({
         cancelClass: {
             type: String,
             default: 'has-text-link'
-        },
-    },
+        }
+    }
 });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

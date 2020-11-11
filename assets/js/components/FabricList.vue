@@ -1,20 +1,33 @@
 <template>
     <section class="section">
         <div class="fabric-list columns is-mobile">
-            <div v-for="fabric in fabrics" :key="fabric.id" class="column is-12-mobile is-6-tablet is-4-widescreen">
-                <fabric-list-element :fabric="fabric" @fabric-edit="goToFabricForm" @fabric-delete="confirmDelete(fabric)" />
+            <div
+                v-for="fabric in fabrics"
+                :key="fabric.id"
+                class="column is-12-mobile is-6-tablet is-4-widescreen"
+            >
+                <fabric-list-element
+                    :fabric="fabric"
+                    @fabric-edit="goToFabricForm"
+                    @fabric-delete="confirmDelete(fabric)"
+                />
             </div>
         </div>
         <b-modal
             v-model="displayModal"
             has-modal-card
             aria-role="alertdialog"
-            aria-modal>
+            aria-modal
+        >
             <template #default="modal">
                 <confirm-modal
                     @close="closeModal(modal)"
                     @confirm="deleteFabric(modal)"
-                    :modal-message="$t('fabric.delete.confirm.message', {name: fabricToDelete.material})"
+                    :modal-message="
+                        $t('fabric.delete.confirm.message', {
+                            name: fabricToDelete.material
+                        })
+                    "
                     :confirm-message="$t('fabric.delete.confirm.yes')"
                     :cancel-message="$t('fabric.delete.confirm.no')"
                 />
@@ -24,8 +37,8 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, PropType} from '@vue/composition-api';
-import {API} from '../utils/http-common';
+import { defineComponent, PropType } from '@vue/composition-api';
+import { API } from '../utils/http-common';
 import Fabric from '../models/Fabric';
 import FabricListElement from './FabricListElement.vue';
 import ConfirmModal from './ConfirmModal.vue';
@@ -34,18 +47,18 @@ export default defineComponent({
     name: 'FabricList',
     components: {
         ConfirmModal,
-        FabricListElement,
+        FabricListElement
     },
     props: {
         fabrics: {
             type: Array as PropType<Fabric[]>,
-            default: [],
-        },
+            default: []
+        }
     },
     data() {
         return {
             displayModal: false,
-            fabricToDelete: {} as Fabric,
+            fabricToDelete: {} as Fabric
         };
     },
     methods: {
