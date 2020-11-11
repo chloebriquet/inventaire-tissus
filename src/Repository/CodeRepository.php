@@ -22,8 +22,8 @@ class CodeRepository extends ServiceEntityRepository
     public function findUnusedCode(string $name): ?Code
     {
         return $this->findOneBy([
-            'name' => $name,
-            'used_at' => null,
+            'name'    => $name,
+            'usedAt'  => null,
         ]);
     }
 }

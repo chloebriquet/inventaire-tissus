@@ -41,6 +41,9 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
             && 'login' === $request->attributes->get('_route');
     }
 
+    /**
+     * @return array<string>
+     */
     public function getCredentials(Request $request): array
     {
         return [
@@ -61,8 +64,11 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): Response
     {
+        /** @var UserInterface $user */
+        $user = $token->getUser();
+
         return new Response(null, 204, [
-            'Location' => $this->iriConverter->getIriFromItem($token->getUser()),
+            'Location' => $this->iriConverter->getIriFromItem($user),
         ]);
     }
 
@@ -73,7 +79,9 @@ class LoginAuthenticator extends AbstractGuardAuthenticator
 
     public function start(Request $request, AuthenticationException $authException = null): JsonResponse
     {
-        return new JsonResponse(['error' => $authException->getMessageKey()], Response::HTTP_UNAUTHORIZED);
+        $error = null !== $authException ? $authException->getMessageKey() : 'Authentication error';
+
+        return new JsonResponse(['error' => $error], Response::HTTP_UNAUTHORIZED);
     }
 
     public function supportsRememberMe(): bool

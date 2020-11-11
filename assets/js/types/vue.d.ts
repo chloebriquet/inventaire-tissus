@@ -1,7 +1,8 @@
 import User from '../models/User';
 
 declare module 'vue/types/vue' {
-    interface Vue {
-        user: User;
-    }
+  // eslint-disable-next-line no-unused-vars
+  interface Vue {
+    user: User;
+  }
 }

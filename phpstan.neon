@@ -2,5 +2,8 @@ parameters:
     level: 8
     paths:
         - src
+    ignoreErrors:
+        - '#Method App\\Security\\LoginAuthenticator::[a-zA-Z0-9\\_]+\(\) has parameter \$[a-zA-Z0-9\\_]+ with no typehint specified.#'
+        - '#Method App\\DataPersister\\UserDataPersister::[a-zA-Z0-9\\_]+\(\) has parameter \$[a-zA-Z0-9\\_]+ with no typehint specified.#'
     symfony:
         container_xml_path: var/cache/dev/App_KernelDevDebugContainer.xml

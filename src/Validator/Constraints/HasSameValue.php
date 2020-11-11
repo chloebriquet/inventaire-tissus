@@ -11,6 +11,7 @@ class HasSameValue extends Constraint
 {
     public string $type = '';
     public string $message = 'has_same_value';
+    /** @var array<string> */
     public array $fields = [];
     public string $errorPath = '';
 

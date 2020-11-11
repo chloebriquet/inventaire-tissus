@@ -5,7 +5,7 @@ import fr from '../translations/fr.json';
 Vue.use(VueI18n);
 
 const translations = {
-  fr: fr,
+  fr,
 };
 
 export default new VueI18n({

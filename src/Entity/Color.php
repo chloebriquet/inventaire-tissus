@@ -41,6 +41,8 @@ class Color
     public string $code;
 
     /**
+     * @var Collection<int, Fabric>
+     *
      * @ORM\ManyToMany(targetEntity="App\Entity\Fabric", mappedBy="colors")
      */
     public Collection $fabrics;

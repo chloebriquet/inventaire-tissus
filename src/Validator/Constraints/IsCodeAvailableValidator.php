@@ -3,6 +3,7 @@
 namespace App\Validator\Constraints;
 
 use App\Entity\Code;
+use App\Repository\CodeRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -39,6 +40,7 @@ class IsCodeAvailableValidator extends ConstraintValidator
             throw new ConstraintDefinitionException(sprintf('Impossible de trouver le gestionnaire d\'objets associé à une entité de class "%s".', Code::class));
         }
 
+        /** @var CodeRepository $repository */
         $repository = $em->getRepository(Code::class);
         $code = $repository->findUnusedCode($value);
 

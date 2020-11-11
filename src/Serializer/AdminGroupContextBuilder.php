@@ -16,6 +16,12 @@ class AdminGroupContextBuilder implements SerializerContextBuilderInterface
         $this->decorated = $decorated;
         $this->authorizationChecker = $authorizationChecker;
     }
+
+    /**
+     * @param null|array<string> $extractedAttributes
+     *
+     * @return array<string>
+     */
     public function createFromRequest(Request $request, bool $normalization, ?array $extractedAttributes = null): array
     {
         $context = $this->decorated->createFromRequest($request, $normalization, $extractedAttributes);

@@ -76,6 +76,8 @@ class Fabric
     public ?string $comment = null;
 
     /**
+     * @var Collection<int, Color>
+     *
      * @ORM\ManyToMany(targetEntity="App\Entity\Color", inversedBy="fabrics", cascade={"persist"})
      *
      * @Assert\Count(min="1")

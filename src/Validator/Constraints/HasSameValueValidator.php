@@ -23,10 +23,6 @@ class HasSameValueValidator extends ConstraintValidator
             throw new UnexpectedTypeException($constraint->fields, 'array');
         }
 
-        if (null !== $constraint->errorPath && !\is_string($constraint->errorPath)) {
-            throw new UnexpectedTypeException($constraint->errorPath, 'string or null');
-        }
-
         $fields = $constraint->fields;
 
         if (2 !== count($fields)) {

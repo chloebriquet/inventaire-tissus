@@ -32,7 +32,7 @@ class FabricFixtures extends Fixture implements DependentFixtureInterface
             $fabric->thickness = $faker->word;
             $fabric->width = rand(100, 500);
             $fabric->length = rand(100, 500);
-            $fabric->comment = $faker->words(5, true);
+            $fabric->comment = (string) json_encode($faker->words(5, true));
             $fabric->addColor($colors[rand(0, 19)]);
 
             $manager->persist($fabric);

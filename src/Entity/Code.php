@@ -33,5 +33,5 @@ class Code
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    public ?\DateTimeInterface $used_at = null;
+    public ?\DateTimeInterface $usedAt = null;
 }

@@ -8,8 +8,10 @@ use Doctrine\Persistence\ObjectManager;
 
 class ColorFixtures extends Fixture
 {
+    /** @var array<string> */
     protected array $webcolors;
 
+    /** @param  array<string> $webcolors */
     public function __construct(array $webcolors)
     {
         $this->webcolors = $webcolors;
