@@ -10,10 +10,6 @@
 /.docker/data/mysql
 ###< docker ###
 
-###> server ###
-/public/.htaccess
-###< server ###
-
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
